@@ -1,11 +1,13 @@
 import './App.css'
+import { Routes, Route } from 'react-router'
+import { Home } from './pages/Home/Home'
 
 function App() {
 
   return (
-    <>
-      <h1>IMDB CLone</h1>
-    </>
+    <Routes>
+      <Route path='/' element={ <Home /> } />
+    </Routes>
   )
 }
 

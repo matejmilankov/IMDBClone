@@ -4,4 +4,11 @@
     --color-text: #FFFFFF;
     --color-primary-accent: #F5C518;
     --color-secondary-accent: #0E63BE;
+
+    --spacing-extra-sm: 8px;
+    --spacing-sm: 12px;
+    --spacing-df: 16px;
+    --spacing-md: 24px;
+    --spacing-lg: 32px;
+    --spacing-extra-lg: 48px;
 }
