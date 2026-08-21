@@ -1,13 +1,36 @@
 import styles from './Header.module.css'
 import searchIcon from '../../assets/search-svgrepo-com.svg'
 import gsap from 'gsap';
-import { useRef } from 'react'
+import axios from 'axios';
+import { useRef, useEffect, useState } from 'react'
 import { useGSAP } from '@gsap/react'
 
 export function Header() {
-    const container = useRef(null);
+    const searchForm = useRef(null);
     const overlay = useRef(null);
     const tl = useRef(null);
+
+    const [search, setSearch] = useState("");
+
+    useEffect(() => {
+        if (search.length < 3) return;
+        const timer = setTimeout(async () => {
+            const response = await axios.get("https://api.themoviedb.org/3/search/movie",
+                {
+                    params: {
+                        query: search
+                    },
+                    headers: {
+                        Authorization: `Bearer ${import.meta.env.VITE_TMDB_ACCESS_TOKEN}`
+                    }
+                }
+            );
+            console.log(response.data);
+
+        }, 500);
+
+        return () => clearTimeout(timer);
+    }, [search]);
 
     useGSAP(() => {
         tl.current = gsap.timeline({ paused: true })
@@ -16,20 +39,26 @@ export function Header() {
                 pointerEvents: 'auto',
                 duration: 0.3
             })
-            .to("form", {
-                scale: 1.1, 
-                y: 5, 
-                transformOrigin: "center center", 
+            .to(searchForm.current, {
+                scale: 1.1,
+                y: 5,
+                transformOrigin: "center center",
                 duration: 0.3
             }, "<");
-    }, {scope: container});
+    });
 
     const scaleSearchBar = () => tl.current?.play();
     const handleClose = () => tl.current?.reverse();
 
+    const searchForResults = (event) => {
+        setSearch(event.target.value);
+    }
+
+    const handleSubmit = (event) => event.preventDefault();
+
     return (
-        <> 
-            <div 
+        <>
+            <div
                 ref={overlay}
                 className={styles.backdropOverlay}
                 onClick={handleClose}
@@ -37,7 +66,7 @@ export function Header() {
 
             <nav className={styles.headerWrapper}>
                 <div className='container'>
-                    <div className={styles.headerContainer} ref={container}>
+                    <div className={styles.headerContainer}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="64" height="32" viewBox="0 0 64 32" version="1.1">
                             <g fill="#F5C518">
                                 <rect x="0" y="0" width="100%" height="100%" rx="4"></rect>
@@ -55,11 +84,13 @@ export function Header() {
                             <span>Menu</span>
                         </button>
 
-                        <form action="" className={styles.searchForm}>
+                        <form onSubmit={handleSubmit} className={styles.searchForm} ref={searchForm}>
                             <input
                                 type="text"
                                 placeholder='Search movies...'
                                 onFocus={scaleSearchBar}
+                                onChange={searchForResults}
+                                name='movies'
                             />
                             <button type='submit' className={styles.searchButton}>
                                 <img src={searchIcon} alt="" />
