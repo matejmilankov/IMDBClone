@@ -7,34 +7,41 @@ import { useGSAP } from '@gsap/react'
 
 export function Header() {
     const searchForm = useRef(null);
-    const overlay = useRef(null);
-    const tl = useRef(null);
+    const blurOverlay = useRef(null);
+    const timeline = useRef(null);
 
-    const [search, setSearch] = useState("");
+    const [searchInput, setSearchInput] = useState("");
+    const [movies, setMovies] = useState([]);
 
     useEffect(() => {
-        if (search.length < 3) return;
+        if (searchInput.length < 3) return;
         const timer = setTimeout(async () => {
-            const response = await axios.get("https://api.themoviedb.org/3/search/movie",
-                {
-                    params: {
-                        query: search
-                    },
-                    headers: {
-                        Authorization: `Bearer ${import.meta.env.VITE_TMDB_ACCESS_TOKEN}`
+            try {
+                const response = await axios.get("https://api.themoviedb.org/3/search/movie",
+                    {
+                        params: {
+                            query: searchInput
+                        },
+                        headers: {
+                            Authorization: `Bearer ${import.meta.env.VITE_TMDB_ACCESS_TOKEN}`
+                        }
                     }
-                }
-            );
-            console.log(response.data);
+                );
+                console.log(response.data.results);
+                setMovies(response.data.results);
+
+            } catch {
+                console.log("Error, couldn't load movies.");
+            }
 
         }, 500);
 
         return () => clearTimeout(timer);
-    }, [search]);
+    }, [searchInput]);
 
     useGSAP(() => {
-        tl.current = gsap.timeline({ paused: true })
-            .to(overlay.current, {
+        timeline.current = gsap.timeline({ paused: true })
+            .to(blurOverlay.current, {
                 opacity: 1,
                 pointerEvents: 'auto',
                 duration: 0.3
@@ -47,11 +54,17 @@ export function Header() {
             }, "<");
     });
 
-    const scaleSearchBar = () => tl.current?.play();
-    const handleClose = () => tl.current?.reverse();
+    const openSearchbar = () => timeline.current?.play();
+    const closeSearchbar = () => {
+        setSearchInput("");
+        setMovies([]);
+        timeline.current?.reverse();
+    }
 
     const searchForResults = (event) => {
-        setSearch(event.target.value);
+        const query = event.target.value;
+        setSearchInput(query.trim());
+        if(query.trim().length < 3) setMovies([]);
     }
 
     const handleSubmit = (event) => event.preventDefault();
@@ -59,10 +72,19 @@ export function Header() {
     return (
         <>
             <div
-                ref={overlay}
+                ref={blurOverlay}
                 className={styles.backdropOverlay}
-                onClick={handleClose}
+                onClick={closeSearchbar}
             />
+
+            <div className={styles.searchWrapper}>
+                {movies.map(movie => (
+                    <div className={styles.movie}>
+                        <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="" />
+                        <p>{movie.original_title}</p>
+                    </div>
+                ))}
+            </div>
 
             <nav className={styles.headerWrapper}>
                 <div className='container'>
@@ -88,9 +110,10 @@ export function Header() {
                             <input
                                 type="text"
                                 placeholder='Search movies...'
-                                onFocus={scaleSearchBar}
+                                onFocus={openSearchbar}
                                 onChange={searchForResults}
                                 name='movies'
+                                value={searchInput}
                             />
                             <button type='submit' className={styles.searchButton}>
                                 <img src={searchIcon} alt="" />
