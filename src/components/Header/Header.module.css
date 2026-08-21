@@ -32,6 +32,7 @@
 .searchForm {
     flex: 1;
     position: relative;
+    z-index: 20;
 }
 
 .searchForm input {
@@ -74,4 +75,17 @@
 .line {
     height: 100%;
     opacity: 0.5;
+}
+
+.backdropOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0;
 }
