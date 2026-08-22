@@ -94,21 +94,12 @@
     position: fixed;
     top: 0;
     bottom: 0;
-    padding: 150px 50px 20px 50px;
+    padding: 150px 50px 50px 50px;
     z-index: 10;
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: space-between;
+    align-content: flex-start;
     overflow-y: auto;
     pointer-events: none;
-}
-
-.movie {
-    width: calc((100% - 80px) / 8);
-    pointer-events: auto;
-}
-
-.movie img {
-    width: 100%;
 }

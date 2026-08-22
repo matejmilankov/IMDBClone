@@ -1,0 +1,7 @@
+.movie {
+    width: calc((100% - 140px) / 8);
+    pointer-events: auto;
+}
+.movie img {
+    width: 100%;
+}

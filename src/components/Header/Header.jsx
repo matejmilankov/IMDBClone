@@ -4,6 +4,7 @@ import gsap from 'gsap';
 import axios from 'axios';
 import { useRef, useEffect, useState } from 'react'
 import { useGSAP } from '@gsap/react'
+import { CompactMovieCard } from '../CompactMovieCard/CompactMovieCard';
 
 export function Header() {
     const searchForm = useRef(null);
@@ -63,7 +64,7 @@ export function Header() {
 
     const searchForResults = (event) => {
         const query = event.target.value;
-        setSearchInput(query.trim());
+        setSearchInput(query);
         if(query.trim().length < 3) setMovies([]);
     }
 
@@ -79,10 +80,10 @@ export function Header() {
 
             <div className={styles.searchWrapper}>
                 {movies.map(movie => (
-                    <div className={styles.movie}>
-                        <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="" />
-                        <p>{movie.original_title}</p>
-                    </div>
+                    <CompactMovieCard 
+                        key={movie.id}
+                        movie={movie}
+                    />
                 ))}
             </div>
 
