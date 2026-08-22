@@ -10,6 +10,7 @@ export function Header() {
     const searchForm = useRef(null);
     const blurOverlay = useRef(null);
     const timeline = useRef(null);
+    const searchWrapper = useRef(null);
 
     const [searchInput, setSearchInput] = useState("");
     const [movies, setMovies] = useState([]);
@@ -52,20 +53,29 @@ export function Header() {
                 y: 5,
                 transformOrigin: "center center",
                 duration: 0.3
+            }, "<")
+            .to(searchWrapper.current, {
+                opacity: 1,
+                duration: 0.3
             }, "<");
     });
 
     const openSearchbar = () => timeline.current?.play();
     const closeSearchbar = () => {
         setSearchInput("");
-        setMovies([]);
+        gsap.to(".searchWrapper", {
+            opacity: 0,
+            onComplete: () => {
+                setMovies([]);
+            }
+        })
         timeline.current?.reverse();
     }
 
     const searchForResults = (event) => {
         const query = event.target.value;
         setSearchInput(query);
-        if(query.trim().length < 3) setMovies([]);
+        if (query.trim().length < 3) setMovies([]);
     }
 
     const handleSubmit = (event) => event.preventDefault();
@@ -78,9 +88,9 @@ export function Header() {
                 onClick={closeSearchbar}
             />
 
-            <div className={styles.searchWrapper}>
+            <div className={styles.searchWrapper} ref={searchWrapper}>
                 {movies.map(movie => (
-                    <CompactMovieCard 
+                    <CompactMovieCard
                         key={movie.id}
                         movie={movie}
                     />

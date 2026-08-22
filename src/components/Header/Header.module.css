@@ -16,7 +16,7 @@
     align-items: center;
     gap: 4px;
     height: 100%;
-    padding: 0 15px;
+    padding: 0 var(--spacing-df);
     border-radius: 15px;
 }
 
@@ -51,7 +51,7 @@
     background: none;
     cursor: pointer;
     height: 100%;
-    margin-right: 10px;
+    margin-right: var(--spacing-extra-sm);
 }
 
 .searchButton img {
@@ -63,7 +63,7 @@
     height: 100%;
     display: flex;
     align-items: center;
-    padding: 10px 15px;
+    padding: var(--spacing-extra-sm) var(--spacing-df);
     border-radius: 15px;
 }
 
@@ -102,4 +102,5 @@
     align-content: flex-start;
     overflow-y: auto;
     pointer-events: none;
+    opacity: 0;
 }
