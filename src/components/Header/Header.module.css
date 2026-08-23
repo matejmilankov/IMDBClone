@@ -104,3 +104,27 @@
     pointer-events: none;
     opacity: 0;
 }
+
+.menuWrapper {
+    position: fixed;
+    z-index: 99;
+    inset: 0;
+    padding: var(--spacing-df);
+    background-color: var(--color-light-background);
+    transform: translateY(-100%);
+}
+
+.menuHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.closeButton {
+    background-color: var(--color-primary-accent);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    padding: var(--spacing-sm);
+}
