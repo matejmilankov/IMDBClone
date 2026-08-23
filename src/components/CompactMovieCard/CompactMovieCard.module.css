@@ -1,15 +1,15 @@
-.movie {
+.movieCard {
     width: calc((100% - 140px) / 7);
     pointer-events: auto;
     display: flex;
     flex-direction: column;
 }
-.movie img {
+.movieCard img {
     width: 100%;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
 }
-.movie div {
+.movieCard div {
     background-color: var(--color-light-background);
     padding: var(--spacing-sm);
     border-bottom-left-radius: 12px;

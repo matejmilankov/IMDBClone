@@ -53,23 +53,34 @@ export function Header() {
                 y: 5,
                 transformOrigin: "center center",
                 duration: 0.3
-            }, "<")
-            .to(searchWrapper.current, {
-                opacity: 1,
-                duration: 0.3
             }, "<");
     });
 
+    useGSAP(() => {
+        if(movies.length > 0 && searchWrapper.current) {
+            gsap.fromTo(searchWrapper.current, 
+                { opacity: 0, y: 15 },
+                { opacity: 1, y: 0, duration: 0.3, ease: "power2.out"}
+            );
+        }
+    }, [movies]);
+
+
     const openSearchbar = () => timeline.current?.play();
+
     const closeSearchbar = () => {
-        setSearchInput("");
-        gsap.to(".searchWrapper", {
-            opacity: 0,
-            onComplete: () => {
-                setMovies([]);
-            }
-        })
-        timeline.current?.reverse();
+        if (searchWrapper.current) {
+            gsap.to(searchWrapper.current, {
+                opacity: 0,
+                y: 15,
+                duration: 0.3
+            })
+        }
+
+        timeline.current?.reverse().then(() => {
+            setSearchInput("");
+            setMovies([]);
+        });
     }
 
     const searchForResults = (event) => {
