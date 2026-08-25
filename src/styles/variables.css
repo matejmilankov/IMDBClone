@@ -11,4 +11,10 @@
     --spacing-md: 24px;
     --spacing-lg: 32px;
     --spacing-extra-lg: 48px;
+
+    --font-size-extra-sm: 12px;
+    --font-size-sm: 14px;
+    --font-size-md: 20px;
+    --font-size-lg: 24px;
+    --font-size-extra-lg: 32px;
 }
