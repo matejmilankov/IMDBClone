@@ -2,6 +2,7 @@ import { Header } from "../../components/Header/Header"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Navigation, Autoplay } from "swiper/modules";
 import { useEffect, useRef, useState } from "react";
+import { PlayIcon, LikeIcon } from "../../components/Icons/Icons";
 import axios from "axios";
 import styles from './Home.module.css'
 
@@ -20,14 +21,23 @@ export function Home() {
     useEffect(() => {
         const fetchHeroMovies = async () => {
             try {
-                const response = await axios.get('https://api.themoviedb.org/3/movie/now_playing',
-                    {
-                        headers: {
-                            Authorization: `Bearer ${import.meta.env.VITE_TMDB_ACCESS_TOKEN}`
-                        }
-                    }
+                const response = await axios.get('https://api.themoviedb.org/3/movie/now_playing',{
+                        headers: { Authorization: `Bearer ${import.meta.env.VITE_TMDB_ACCESS_TOKEN}` }
+                });
+
+                const basicMovies = response.data.results.slice(0, 10);
+                
+                const detailedMovies = await Promise.all(
+                    basicMovies.map(async (movie) => {
+                        const detailsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${movie.id}`, {
+                            headers:{ Authorization: `Bearer ${import.meta.env.VITE_TMDB_ACCESS_TOKEN}` }
+                        });
+
+                        return detailsResponse.data;
+                    })
                 );
-                setHeroMovies(response.data.results);
+                console.log(detailedMovies)
+                setHeroMovies(detailedMovies);
             } catch {
                 throw "Error, couldn't load movies";
             }
@@ -42,6 +52,11 @@ export function Home() {
         mainSwiper.current?.slideToLoop(index);
     };
 
+    const formatRuntime = (minutes) => {
+        const min = minutes % 60;
+        return `${Math.floor(minutes / 60)}:${min < 10 ? `0${min}` : min}`
+    }
+
     return (
         <>
             <div className={styles.heroLayout}>
@@ -53,7 +68,7 @@ export function Home() {
                         slidesPerView={1}
                         navigation
                         pagination={{ clickable: true }}
-                        autoplay={{ delay: 4000 }}
+                        // autoplay={{ delay: 4000 }}
                         onSwiper={(swiper) => (mainSwiper.current = swiper)}
                         onSlideChange={(swiper) => {
                             const nextIndex = (swiper.realIndex + 1) % heroMovies.length;
@@ -62,10 +77,28 @@ export function Home() {
                         }
                         loop
                     >
-                        {heroMovies.slice(0, 10).map(movie => (
+                        {heroMovies.map(movie => (
                             <SwiperSlide key={movie.id}>
-                                <div className={styles.heroSlide}>
-                                    <img src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`} alt={movie.title} />
+                                <div className={styles.heroSlide} style={{backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})`}}>
+                                    <div className={styles.heroSlideWrap}>
+                                        <img src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt="" />
+                                        <div className={styles.heroSlideContent}>
+                                            <button>
+                                                <PlayIcon width={"72px"} height={"72px"}/>
+                                            </button>
+                                            <div className={styles.heroSlideInfo}>
+                                                <div className={styles.heroSlideInfoHeader}>
+                                                    <span className={styles.movieTitle}>'{movie.title}'</span>
+                                                    <span className={styles.movieRuntime}>{formatRuntime(movie.runtime)}</span>
+                                                </div>
+                                                <span className={styles.trailerHeading}>Watch the Trailer</span>
+                                                <div className={styles.voteWrapper}>
+                                                    <LikeIcon />
+                                                    <span>{movie.vote_count}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </SwiperSlide>
                         ))}

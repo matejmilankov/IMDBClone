@@ -15,10 +15,11 @@ body {
 
 .heroSection > div {
     height: 100%;
+    border-radius: 10px;
 }
 
 .heroSection {
-    margin-bottom: 50px;
+    margin: 20px 20px 50px 20px;
     display: flex;
     gap: 20px;
 }

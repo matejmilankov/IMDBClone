@@ -1,13 +1,59 @@
 .heroSlide {
     width: 100%;
     height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: flex-end;
 }
 
-.heroSlide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.heroSlideInfo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-extra-sm);
 }
+
+.heroSlideWrap {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--spacing-df);
+    margin: var(--spacing-df);
+}
+.heroSlideWrap img {
+    border-radius: 10px;
+}
+
+.heroSlideContent {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.heroSlideInfoHeader {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--spacing-lg);
+}
+
+.movieTitle {
+    font-size: var(--font-size-extra-lg);
+    line-height: 1;
+}
+.movieRuntime {
+    font-size: var(--spacing-md);
+    opacity: 0.6;
+}
+.trailerHeading {
+    opacity: 0.6;
+    font-size: var(--font-size-md);
+}
+
+.voteWrapper {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    opacity: 0.6;
+}
+
 
 .upNextSection > div {
     height: 100%;
@@ -15,9 +61,14 @@
 .upNextSection > div img {
     height: 100%;
     object-fit: cover;
+    border-radius: 10px;
 }
 .upNextSection {
     height: 100%;
     display: flex;
     flex-direction: column;
+}
+
+.heroSlideContent button:hover {
+    color: var(--color-primary-accent);
 }
