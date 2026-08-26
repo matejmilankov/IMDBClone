@@ -30,6 +30,11 @@ button {
     font-size: inherit;
 }
 
+h3 {
+    margin: 0;
+    padding: 0;
+}
+
 span {
     margin: 0;
     padding: 0;

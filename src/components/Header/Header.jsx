@@ -38,7 +38,7 @@ export function Header() {
                 setMovies(response.data.results);
 
             } catch {
-                console.log("Error, couldn't load movies.");
+                throw "Error, couldn't load movies";
             }
 
         }, 500);

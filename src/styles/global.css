@@ -12,3 +12,13 @@ body {
     max-width: 1200px;
     margin: auto;
 }
+
+.heroSection > div {
+    height: 100%;
+}
+
+.heroSection {
+    margin-bottom: 50px;
+    display: flex;
+    gap: 20px;
+}

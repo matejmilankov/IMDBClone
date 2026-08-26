@@ -1,0 +1,23 @@
+.heroSlide {
+    width: 100%;
+    height: 100%;
+}
+
+.heroSlide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.upNextSection > div {
+    height: 100%;
+}
+.upNextSection > div img {
+    height: 100%;
+    object-fit: cover;
+}
+.upNextSection {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
