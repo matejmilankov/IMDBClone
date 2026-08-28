@@ -1,8 +1,22 @@
 import styles from './TrailerCard.module.css'
 import clsx from 'clsx';
+import gsap from 'gsap';
 import { PlayIcon, LikeIcon, BigWatchlistIcon } from "../../components/Icons/Icons";
+import { useEffect, useRef } from 'react';
+import { useSwiperSlide } from 'swiper/react';
 
 export function TrailerCard({ movie, variant }) {
+    const contentRef = useRef(null);
+    const swiperSlide = useSwiperSlide();
+
+    useEffect(() => {
+        if(swiperSlide?.isActive && variant === 'large' && contentRef.current) {
+            gsap.fromTo(contentRef.current, 
+                { opacity: 0, y: 20 },
+                { opacity: 1, y: 0, duration: 0.6 }
+            );
+        }
+    }, [swiperSlide?.isActive, variant]);
 
     const formatRuntime = (minutes) => {
         const min = minutes % 60;
@@ -10,7 +24,7 @@ export function TrailerCard({ movie, variant }) {
     }
 
     return (
-        <div className={clsx(styles.heroSlideWrap, styles[variant])}>
+        <div className={clsx(styles.heroSlideWrap, styles[variant])} ref={contentRef}>
             <div className={styles.coverImageWrapper}>
                 <img src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt={movie.title} />
                 {variant === 'large' && (

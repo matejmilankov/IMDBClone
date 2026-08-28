@@ -37,7 +37,7 @@ export function WatchlistIcon() {
 export function BigWatchlistIcon({ bookmarkWidth, bookmarkHeight, plusWidth, plusHeight}) {
     return (
         <div className={styles.heroWatchlistWrap}>
-            <div className={styles.heroWatchlist} aria-label="Add to Watchlist" aria-pressed="false" role="button" tabindex="0">
+            <div className={styles.heroWatchlist} aria-label="Add to Watchlist" aria-pressed="false" role="button">
                 <svg width={bookmarkWidth} height={bookmarkHeight} viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation">
                     <polygon fill="#000000" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343"></polygon>
                     <polygon points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343"></polygon>

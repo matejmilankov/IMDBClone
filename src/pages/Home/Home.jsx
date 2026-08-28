@@ -36,7 +36,6 @@ export function Home() {
                         return detailsResponse.data;
                     })
                 );
-                console.log(detailedMovies)
                 setHeroMovies(detailedMovies);
             } catch {
                 throw "Error, couldn't load movies";
@@ -62,7 +61,6 @@ export function Home() {
                         spaceBetween={30}
                         slidesPerView={1}
                         navigation
-                        pagination={{ clickable: true }}
                         // autoplay={{ delay: 4000 }}
                         onSwiper={(swiper) => (mainSwiper.current = swiper)}
                         onSlideChange={(swiper) => {
