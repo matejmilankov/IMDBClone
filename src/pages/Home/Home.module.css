@@ -7,54 +7,6 @@
     align-items: flex-end;
 }
 
-.heroSlideInfo {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-extra-sm);
-}
-
-.heroSlideWrap {
-    display: flex;
-    align-items: flex-end;
-    gap: var(--spacing-df);
-    margin: var(--spacing-df);
-}
-.heroSlideWrap img {
-    border-radius: 10px;
-}
-
-.heroSlideContent {
-    display: flex;
-    gap: var(--spacing-md);
-}
-
-.heroSlideInfoHeader {
-    display: flex;
-    align-items: flex-end;
-    gap: var(--spacing-lg);
-}
-
-.movieTitle {
-    font-size: var(--font-size-extra-lg);
-    line-height: 1;
-}
-.movieRuntime {
-    font-size: var(--spacing-md);
-    opacity: 0.6;
-}
-.trailerHeading {
-    opacity: 0.6;
-    font-size: var(--font-size-md);
-}
-
-.voteWrapper {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    opacity: 0.6;
-}
-
-
 .upNextSection > div {
     height: 100%;
 }
@@ -64,11 +16,9 @@
     border-radius: 10px;
 }
 .upNextSection {
-    height: 100%;
     display: flex;
+    gap: var(--spacing-df);
     flex-direction: column;
+    flex: 0 0 clamp(280px, 25vw, 400px);
 }
 
-.heroSlideContent button:hover {
-    color: var(--color-primary-accent);
-}

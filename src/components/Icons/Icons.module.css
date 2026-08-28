@@ -1,0 +1,20 @@
+.heroWatchlist {
+    position: relative;
+}
+.heroWatchlistWrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.heroWatchlist svg:first-child {
+    display: block;
+    opacity: 0.5;
+}
+
+.heroWatchlist svg:last-child {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

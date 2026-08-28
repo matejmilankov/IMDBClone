@@ -2,7 +2,7 @@ import { Header } from "../../components/Header/Header"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Navigation, Autoplay } from "swiper/modules";
 import { useEffect, useRef, useState } from "react";
-import { PlayIcon, LikeIcon } from "../../components/Icons/Icons";
+import { TrailerCard } from "../../components/TrailerCard/TrailerCard";
 import axios from "axios";
 import styles from './Home.module.css'
 
@@ -52,11 +52,6 @@ export function Home() {
         mainSwiper.current?.slideToLoop(index);
     };
 
-    const formatRuntime = (minutes) => {
-        const min = minutes % 60;
-        return `${Math.floor(minutes / 60)}:${min < 10 ? `0${min}` : min}`
-    }
-
     return (
         <>
             <div className={styles.heroLayout}>
@@ -80,25 +75,7 @@ export function Home() {
                         {heroMovies.map(movie => (
                             <SwiperSlide key={movie.id}>
                                 <div className={styles.heroSlide} style={{backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})`}}>
-                                    <div className={styles.heroSlideWrap}>
-                                        <img src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt="" />
-                                        <div className={styles.heroSlideContent}>
-                                            <button>
-                                                <PlayIcon width={"72px"} height={"72px"}/>
-                                            </button>
-                                            <div className={styles.heroSlideInfo}>
-                                                <div className={styles.heroSlideInfoHeader}>
-                                                    <span className={styles.movieTitle}>'{movie.title}'</span>
-                                                    <span className={styles.movieRuntime}>{formatRuntime(movie.runtime)}</span>
-                                                </div>
-                                                <span className={styles.trailerHeading}>Watch the Trailer</span>
-                                                <div className={styles.voteWrapper}>
-                                                    <LikeIcon />
-                                                    <span>{movie.vote_count}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <TrailerCard movie={movie} variant='large' />
                                 </div>
                             </SwiperSlide>
                         ))}
@@ -121,7 +98,12 @@ export function Home() {
                                     key={movie.id}
                                     onClick={() => handleUpNextClick(index)}
                                 >
-                                    <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
+                                    <a href="#">
+                                        <TrailerCard 
+                                            movie={movie}
+                                            variant={'small'}    
+                                        />
+                                    </a>
                                 </SwiperSlide>
                             ))}
                         </Swiper>

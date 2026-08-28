@@ -1,0 +1,115 @@
+.heroSlideWrap {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--spacing-df);
+    margin: var(--spacing-df);
+}
+.heroSlideWrap img {
+    border-radius: 10px;
+}
+
+.heroSlideContent {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.heroSlideContent button:hover {
+    color: var(--color-primary-accent);
+}
+
+.heroSlideInfo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-extra-sm);
+}
+
+.heroSlideInfoHeader {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--spacing-lg);
+}
+
+.movieTitle {
+    font-size: var(--font-size-extra-lg);
+    line-height: 1;
+}
+.movieRuntime {
+    font-size: var(--spacing-md);
+    opacity: 0.6;
+}
+.trailerHeading {
+    opacity: 0.6;
+    font-size: var(--font-size-md);
+}
+
+.voteWrapper {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    opacity: 0.6;
+}
+
+.coverImageWrapper {
+    position: relative;
+}
+
+.addToWatchlist:hover svg {
+    opacity: 1;
+}
+
+/* SMALL */
+
+.small .movieTitle {
+    font-size: var(--font-size-lg);
+}
+
+.small .heroSlideContent {
+    flex-direction: column;
+    min-width: 0;
+}
+
+.small .heroSlideContent button svg {
+    width: 48px;
+    height: 48px;
+}
+
+.small .heroSlideContent button {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--spacing-sm);
+}
+
+.small .movieRuntime {
+    font-size: var(--spacing-df);
+}
+
+.small.heroSlideWrap {
+    height: 100%;
+    align-items: stretch;
+    margin: 0;
+}
+
+.small .coverImageWrapper {
+    height: 100%;
+    flex-shrink: 0;
+}
+
+.small .coverImageWrapper img {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.small .trailerHeading {
+    font-size: var(--font-size-df);
+}
+
+.small .voteWrapper span {
+    font-size: var(--font-size-sm);
+}
+
+.small .voteWrapper svg {
+    width: 20px;
+    height: 20px;
+}
