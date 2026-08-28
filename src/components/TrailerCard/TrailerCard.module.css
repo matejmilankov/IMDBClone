@@ -3,6 +3,7 @@
     align-items: flex-end;
     gap: var(--spacing-df);
     margin: var(--spacing-df);
+    width: 100%;
 }
 .heroSlideWrap img {
     border-radius: 10px;
@@ -11,6 +12,7 @@
 .heroSlideContent {
     display: flex;
     gap: var(--spacing-md);
+    width: 100%;
 }
 
 .heroSlideContent button:hover {
