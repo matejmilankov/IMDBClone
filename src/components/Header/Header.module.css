@@ -162,3 +162,10 @@
     flex-direction: column;
     gap: 50px;
 }
+
+.compactMovieCard {
+    width: calc((100% - 140px) / 7);
+    pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+}

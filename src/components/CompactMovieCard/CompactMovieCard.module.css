@@ -1,6 +1,6 @@
 .movieCard {
-    width: calc((100% - 140px) / 7);
-    pointer-events: auto;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
 }

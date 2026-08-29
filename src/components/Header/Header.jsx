@@ -3,16 +3,17 @@ import searchIcon from '../../assets/search-svgrepo-com.svg'
 import gsap from 'gsap';
 import axios from 'axios';
 import { useRef, useEffect, useState } from 'react'
+import { Link } from 'react-router';
 import { useGSAP } from '@gsap/react'
 import { CompactMovieCard } from '../CompactMovieCard/CompactMovieCard';
 import { LogoIcon, HamburgerIcon, ImdbProIcon, WatchlistIcon, ProfileIcon, CloseIcon, MovieIcon, WatchIcon, TvIcon, EventsIcon, UserIcon, GlobeIcon } from '../Icons/Icons';
 
 export function Header() {
-    const searchForm = useRef(null);
-    const blurOverlay = useRef(null);
-    const searchWrapper = useRef(null);
+    const searchFormRef = useRef(null);
+    const blurOverlayRef = useRef(null);
+    const searchWrapperRef = useRef(null);
     
-    const menuWrapper = useRef(null);
+    const menuWrapperRef = useRef(null);
 
     const searchTimeline = useRef(null);
     const menuTimeline = useRef(null);
@@ -27,12 +28,8 @@ export function Header() {
             try {
                 const response = await axios.get("https://api.themoviedb.org/3/search/movie",
                     {
-                        params: {
-                            query: searchInput
-                        },
-                        headers: {
-                            Authorization: `Bearer ${import.meta.env.VITE_TMDB_ACCESS_TOKEN}`
-                        }
+                        params: { query: searchInput },
+                        headers: { Authorization: `Bearer ${import.meta.env.VITE_TMDB_ACCESS_TOKEN}` }
                     }
                 );
                 setMovies(response.data.results);
@@ -49,12 +46,12 @@ export function Header() {
     // Timeline animation for searchbar
     useGSAP(() => {
         searchTimeline.current = gsap.timeline({ paused: true })
-            .to(blurOverlay.current, {
+            .to(blurOverlayRef.current, {
                 opacity: 1,
                 pointerEvents: 'auto',
                 duration: 0.3
             })
-            .to(searchForm.current, {
+            .to(searchFormRef.current, {
                 scale: 1.1,
                 y: 5,
                 transformOrigin: "center center",
@@ -64,8 +61,8 @@ export function Header() {
 
     // Animation for searched movies
     useGSAP(() => {
-        if(movies.length > 0 && searchWrapper.current) {
-            gsap.fromTo(searchWrapper.current, 
+        if(movies.length > 0 && searchWrapperRef.current) {
+            gsap.fromTo(searchWrapperRef.current, 
                 { opacity: 0, y: 15 },
                 { opacity: 1, y: 0, duration: 0.3, ease: "power2.out"}
             );
@@ -74,10 +71,13 @@ export function Header() {
 
 
     // Handlers for opening and closing searhcbar
-    const openSearchbar = () => searchTimeline.current?.play();
+    const openSearchbar = () => {
+        searchTimeline.current?.play();
+        document.body.style.overflow = 'hidden';
+    }
     const closeSearchbar = () => {
-        if (searchWrapper.current) {
-            gsap.to(searchWrapper.current, {
+        if (searchWrapperRef.current) {
+            gsap.to(searchWrapperRef.current, {
                 opacity: 0,
                 y: 15,
                 duration: 0.3
@@ -87,6 +87,7 @@ export function Header() {
         searchTimeline.current?.reverse().then(() => {
             setSearchInput("");
             setMovies([]);
+            document.body.style.overflow = 'unset';
         });
     }
 
@@ -102,7 +103,7 @@ export function Header() {
     // Timeline animation for opening and closing menu
     useGSAP(() => {
         menuTimeline.current = gsap.timeline({ paused: true})
-            .to(menuWrapper.current, {
+            .to(menuWrapperRef.current, {
                 y: 0,
                 duration: 0.5,
                 ease: "power2.out"
@@ -114,21 +115,23 @@ export function Header() {
     return (
         <>
             <div
-                ref={blurOverlay}
+                ref={blurOverlayRef}
                 className={styles.backdropOverlay}
                 onClick={closeSearchbar}
             />
 
-            <div className={styles.searchWrapper} ref={searchWrapper}>
+            <div className={styles.searchWrapper} ref={searchWrapperRef}>
                 {movies.map(movie => (
-                    <CompactMovieCard
-                        key={movie.id}
-                        movie={movie}
-                    />
+                    <Link to={`/movie/${movie.id}`} 
+                          className={styles.compactMovieCard}
+                          key={movie.id}
+                    >
+                        <CompactMovieCard movie={movie} />
+                    </Link>
                 ))}
             </div>
 
-            <div className={styles.menuWrapper} ref={menuWrapper}>
+            <div className={styles.menuWrapper} ref={menuWrapperRef}>
                 <div className='container'>
                     <div className={styles.menuHeader}>
                         <LogoIcon />
@@ -227,7 +230,7 @@ export function Header() {
                             <span>Menu</span>
                         </button>
 
-                        <form onSubmit={handleSubmit} className={styles.searchForm} ref={searchForm}>
+                        <form onSubmit={handleSubmit} className={styles.searchForm} ref={searchFormRef}>
                             <input
                                 type="text"
                                 placeholder='Search movies...'
