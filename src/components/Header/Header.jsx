@@ -3,6 +3,7 @@ import searchIcon from '../../assets/search-svgrepo-com.svg'
 import gsap from 'gsap';
 import axios from 'axios';
 import { useRef, useEffect, useState } from 'react'
+import { useWatchlist } from '../../contexts/WatchlistContext';
 import { Link } from 'react-router';
 import { useGSAP } from '@gsap/react'
 import { CompactMovieCard } from '../CompactMovieCard/CompactMovieCard';
@@ -12,7 +13,7 @@ export function Header() {
     const searchFormRef = useRef(null);
     const blurOverlayRef = useRef(null);
     const searchWrapperRef = useRef(null);
-    
+
     const menuWrapperRef = useRef(null);
 
     const searchTimeline = useRef(null);
@@ -20,6 +21,7 @@ export function Header() {
 
     const [searchInput, setSearchInput] = useState("");
     const [movies, setMovies] = useState([]);
+    const { watchlist } = useWatchlist();
 
     // Fetching movies from API
     useEffect(() => {
@@ -61,10 +63,10 @@ export function Header() {
 
     // Animation for searched movies
     useGSAP(() => {
-        if(movies.length > 0 && searchWrapperRef.current) {
-            gsap.fromTo(searchWrapperRef.current, 
+        if (movies.length > 0 && searchWrapperRef.current) {
+            gsap.fromTo(searchWrapperRef.current,
                 { opacity: 0, y: 15 },
-                { opacity: 1, y: 0, duration: 0.3, ease: "power2.out"}
+                { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }
             );
         }
     }, [movies]);
@@ -102,7 +104,7 @@ export function Header() {
 
     // Timeline animation for opening and closing menu
     useGSAP(() => {
-        menuTimeline.current = gsap.timeline({ paused: true})
+        menuTimeline.current = gsap.timeline({ paused: true })
             .to(menuWrapperRef.current, {
                 y: 0,
                 duration: 0.5,
@@ -122,9 +124,9 @@ export function Header() {
 
             <div className={styles.searchWrapper} ref={searchWrapperRef}>
                 {movies.map(movie => (
-                    <Link to={`/movie/${movie.id}`} 
-                          className={styles.compactMovieCard}
-                          key={movie.id}
+                    <Link to={`/movie/${movie.id}`}
+                        className={styles.compactMovieCard}
+                        key={movie.id}
                     >
                         <CompactMovieCard movie={movie} />
                     </Link>
@@ -253,6 +255,11 @@ export function Header() {
                         <a href="#" className={styles.headerLink}>
                             <WatchlistIcon />
                             <span>Watchlist</span>
+                            {watchlist.length > 0 && (
+                                <span className={styles.watchlistNumber}>
+                                    {watchlist.length}
+                                </span>
+                            )}
                         </a>
 
                         <button className={styles.menuButton}>
