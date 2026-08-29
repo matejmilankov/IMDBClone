@@ -4,10 +4,12 @@ import gsap from 'gsap';
 import { PlayIcon, LikeIcon, BigWatchlistIcon } from "../../components/Icons/Icons";
 import { useEffect, useRef } from 'react';
 import { useSwiperSlide } from 'swiper/react';
+import { useWatchlist } from '../../contexts/WatchlistContext';
 
 export function TrailerCard({ movie, variant }) {
     const contentRef = useRef(null);
     const swiperSlide = useSwiperSlide();
+    const { toggleWatchlist } = useWatchlist();
 
     useEffect(() => {
         if(swiperSlide?.isActive && variant === 'large' && contentRef.current) {
@@ -28,7 +30,7 @@ export function TrailerCard({ movie, variant }) {
             <div className={styles.coverImageWrapper}>
                 <img src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt={movie.title} />
                 {variant === 'large' && (
-                    <button className={styles.addToWatchlist}>
+                    <button className={styles.addToWatchlist} onClick={() => toggleWatchlist(movie)}>
                         <BigWatchlistIcon
                             bookmarkWidth={"34px"}
                             bookmarkHeight={"47px"}
