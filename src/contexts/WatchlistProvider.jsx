@@ -20,8 +20,12 @@ export function WatchlistProvider({ children }) {
         });
     }
 
+    const isInWatchlist = (movie) => {
+        return watchlist.some(m => m.id === movie.id);
+    }
+
     return (
-        <WatchlistContext.Provider value={{watchlist, toggleWatchlist}}>
+        <WatchlistContext.Provider value={ {watchlist, toggleWatchlist, isInWatchlist} }>
             {children}
         </WatchlistContext.Provider>
     )
