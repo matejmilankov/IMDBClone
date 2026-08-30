@@ -55,8 +55,11 @@
     position: relative;
 }
 
-.addToWatchlist:hover svg {
-    opacity: 1;
+.addToWatchlist polygon {
+    transition: all 0.2s ease-in-out;
+}
+.addToWatchlist:hover polygon {
+    opacity: 0.6;
 }
 
 /* SMALL */
