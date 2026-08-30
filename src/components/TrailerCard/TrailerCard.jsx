@@ -30,7 +30,12 @@ export function TrailerCard({ movie, variant }) {
             <div className={styles.coverImageWrapper}>
                 <img src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt={movie.title} />
                 {variant === 'large' && (
-                    <button className={styles.addToWatchlist} onClick={() => toggleWatchlist(movie)}>
+                    <button className={styles.addToWatchlist} 
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                toggleWatchlist(movie)
+                            }}
+                    >
                         <BigWatchlistIcon
                             bookmarkWidth={"34px"}
                             bookmarkHeight={"47px"}

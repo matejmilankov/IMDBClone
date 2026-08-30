@@ -10,6 +10,8 @@ import { CompactMovieCard } from '../CompactMovieCard/CompactMovieCard';
 import { LogoIcon, HamburgerIcon, ImdbProIcon, WatchlistIcon, ProfileIcon, CloseIcon, MovieIcon, WatchIcon, TvIcon, EventsIcon, UserIcon, GlobeIcon } from '../Icons/Icons';
 
 export function Header() {
+    const { watchlist } = useWatchlist();
+
     const searchFormRef = useRef(null);
     const blurOverlayRef = useRef(null);
     const searchWrapperRef = useRef(null);
@@ -24,8 +26,8 @@ export function Header() {
     const [searchInput, setSearchInput] = useState("");
     const [movies, setMovies] = useState([]);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-    const { watchlist } = useWatchlist();
+    const [prevWatchlistLength, setPrevWatchlistLength] = useState(watchlist.length);
+    const [autoCloseTrigger, setAutoCloseTrigger] = useState(0);
 
     // Fetching movies from API
     useEffect(() => {
@@ -129,8 +131,10 @@ export function Header() {
             setIsDropdownOpen(prev => !prev);
         }
     }
+
     useEffect(() => {
         const handleClickOutside = (event) => {
+
             if (isDropdownOpen && watchlistRef.current && !watchlistRef.current.contains(event.target))
                 dropdownTimeline.current?.reverse().then(() => {
                     setIsDropdownOpen(false);
@@ -140,6 +144,7 @@ export function Header() {
 
         return () => document.removeEventListener('click', handleClickOutside);
     }, [isDropdownOpen]);
+
     useGSAP(() => {
         if (dropdownRef.current) {
             dropdownTimeline.current = gsap.timeline()
@@ -148,6 +153,33 @@ export function Header() {
                     { opacity: 1, y: 0 });
         }
     }, [isDropdownOpen]);
+
+
+    // Auto open and close dropdown
+    if(prevWatchlistLength !== watchlist.length) {
+        const grew = watchlist.length > prevWatchlistLength;
+        setPrevWatchlistLength(watchlist.length);
+
+        if(grew) {
+            setIsDropdownOpen(true);
+            setAutoCloseTrigger(prev => prev + 1);
+        }
+    }
+    useEffect(() => {
+        if (autoCloseTrigger === 0) return;
+
+        const timerId = setTimeout(() => {
+            if(dropdownTimeline.current) {
+                dropdownTimeline.current.reverse().then(() => {
+                    setIsDropdownOpen(false);
+                });
+            } else {
+                setIsDropdownOpen(false);
+            }
+        }, 2000);
+
+        return () => clearTimeout(timerId);
+    }, [autoCloseTrigger]);
 
     return (
         <>
