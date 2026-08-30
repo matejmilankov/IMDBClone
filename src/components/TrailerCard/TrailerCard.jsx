@@ -36,7 +36,7 @@ export function TrailerCard({ movie, variant }) {
                             bookmarkHeight={"47px"}
                             plusHeight={"24px"}
                             plusWidth={"24px"}
-                            fill={isInWatchlist(movie) ? "#F5C518" : "rgba(0, 0, 0, 0.6)"}
+                            fill={isInWatchlist(movie.id) ? "#F5C518" : "rgba(0, 0, 0, 0.6)"}
                         />
                     </button>
                 )}
