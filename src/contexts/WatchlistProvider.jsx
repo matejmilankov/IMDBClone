@@ -39,7 +39,7 @@ export function WatchlistProvider({ children }) {
     ), [watchlist, isInWatchlist, toggleWatchlist]);
 
     return (
-        <WatchlistContext.Provider value={ value }>
+        <WatchlistContext.Provider value={value}>
             {children}
         </WatchlistContext.Provider>
     )

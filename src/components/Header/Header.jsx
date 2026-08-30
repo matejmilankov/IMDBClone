@@ -13,14 +13,18 @@ export function Header() {
     const searchFormRef = useRef(null);
     const blurOverlayRef = useRef(null);
     const searchWrapperRef = useRef(null);
-
     const menuWrapperRef = useRef(null);
+    const watchlistRef = useRef(null);
+    const dropdownRef = useRef(null);
 
     const searchTimeline = useRef(null);
     const menuTimeline = useRef(null);
+    const dropdownTimeline = useRef(null);
 
     const [searchInput, setSearchInput] = useState("");
     const [movies, setMovies] = useState([]);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
     const { watchlist } = useWatchlist();
 
     // Fetching movies from API
@@ -37,7 +41,8 @@ export function Header() {
                 setMovies(response.data.results);
 
             } catch {
-                throw "Error, couldn't load movies";
+                console.error("Error, couldn't load movies");
+                setMovies([]);
             }
 
         }, 500);
@@ -113,6 +118,36 @@ export function Header() {
     });
     const openMenu = () => menuTimeline.current?.play();
     const closeMenu = () => menuTimeline.current?.reverse();
+
+    // Handle open and close dropdown menu
+    const toggleDropdown = () => {
+        if (isDropdownOpen) {
+            dropdownTimeline.current?.reverse().then(() => {
+                setIsDropdownOpen(prev => !prev);
+            });
+        } else {
+            setIsDropdownOpen(prev => !prev);
+        }
+    }
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (isDropdownOpen && watchlistRef.current && !watchlistRef.current.contains(event.target))
+                dropdownTimeline.current?.reverse().then(() => {
+                    setIsDropdownOpen(false);
+                });
+        }
+        document.addEventListener('click', handleClickOutside);
+
+        return () => document.removeEventListener('click', handleClickOutside);
+    }, [isDropdownOpen]);
+    useGSAP(() => {
+        if (dropdownRef.current) {
+            dropdownTimeline.current = gsap.timeline()
+                .fromTo(dropdownRef.current,
+                    { opacity: 0, y: -10 },
+                    { opacity: 1, y: 0 });
+        }
+    }, [isDropdownOpen]);
 
     return (
         <>
@@ -252,15 +287,38 @@ export function Header() {
 
                         <hr className={styles.line} />
 
-                        <a href="#" className={styles.headerLink}>
-                            <WatchlistIcon />
-                            <span>Watchlist</span>
-                            {watchlist.length > 0 && (
-                                <span className={styles.watchlistNumber}>
-                                    {watchlist.length}
-                                </span>
+                        <div className={styles.watchlistButton} ref={watchlistRef}>
+                            <button className={styles.headerLink} onClick={toggleDropdown}>
+                                <WatchlistIcon />
+                                <span>Watchlist</span>
+                                {watchlist.length > 0 && (
+                                    <span className={styles.watchlistNumber}>
+                                        {watchlist.length}
+                                    </span>
+                                )}
+                            </button>
+                            {isDropdownOpen && (
+                                <div className={styles.watchlistDropdown} ref={dropdownRef}>
+                                    {watchlist.length > 0 ? (
+                                        watchlist.map(movie => (
+                                            <div key={movie.id} className={styles.watchlistDropdownItem}>
+                                                <img src={`https://image.tmdb.org/t/p/w92/${movie.poster_path}`}
+                                                    alt={movie.title}
+                                                />
+                                                <span>{movie.title}</span>
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <p>The watchlist is empty</p>
+                                    )}
+                                    {watchlist.length > 0 && (
+                                        <Link>
+                                            View all
+                                        </Link>
+                                    )}
+                                </div>
                             )}
-                        </a>
+                        </div>
 
                         <button className={styles.menuButton}>
                             <ProfileIcon />

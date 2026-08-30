@@ -21,4 +21,7 @@
     flex-direction: column;
     flex: 0 0 clamp(280px, 25vw, 400px);
 }
+.upNextSection h3 {
+    color: var(--color-primary-accent);
+}
 

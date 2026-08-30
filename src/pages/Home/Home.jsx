@@ -38,7 +38,7 @@ export function Home() {
                 );
                 setHeroMovies(detailedMovies);
             } catch {
-                throw "Error, couldn't load movies";
+                console.error("Error, couldn't load movies");
             }
         }
 
