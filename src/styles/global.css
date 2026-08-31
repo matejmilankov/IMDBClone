@@ -23,3 +23,16 @@ body {
     display: flex;
     gap: 20px;
 }
+
+.headerLink {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-extra-sm) var(--spacing-df);
+    border-radius: 15px;
+}
+
+.headerLink:hover,
+.menuButton:hover {
+    background-color: var(--color-background);
+}

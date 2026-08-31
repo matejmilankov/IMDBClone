@@ -1,7 +1,24 @@
 import styles from './Menu.module.css'
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { useRef } from 'react';
 import { LogoIcon, CloseIcon, MovieIcon, TvIcon, WatchIcon, EventsIcon, UserIcon, GlobeIcon } from "../Icons/Icons";
 
-export function Menu({ closeMenu, menuWrapperRef }) {
+export function Menu({ isMenuOpen, closeMenu }) {
+    const menuWrapperRef = useRef(null);
+    const isFirstRender = useRef(true);
+
+    useGSAP(() => {
+        if(isFirstRender.current) {
+            isFirstRender.current = false;
+            return;
+        }
+
+        if(isMenuOpen) 
+            gsap.to(menuWrapperRef.current, { y: 0, duration: 0.5 });
+        else
+            gsap.to(menuWrapperRef.current, { y: "-100%", duration: 0.5 });
+    }, [isMenuOpen]);
 
     return (
         <>
