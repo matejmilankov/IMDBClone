@@ -6,7 +6,7 @@ import { useEffect, useRef } from 'react';
 import { useSwiperSlide } from 'swiper/react';
 import { useWatchlist } from '../../contexts/WatchlistContext';
 
-export function TrailerCard({ movie, variant }) {
+export function TrailerCard({ movie, variant, setClickedTrailerId }) {
     const contentRef = useRef(null);
     const swiperSlide = useSwiperSlide();
     const { toggleWatchlist, isInWatchlist } = useWatchlist();
@@ -47,7 +47,7 @@ export function TrailerCard({ movie, variant }) {
                 )}
             </div>
             <div className={styles.heroSlideContent}>
-                <button>
+                <button onClick={() => setClickedTrailerId(movie.id)}>
                     <PlayIcon width={"72px"} height={"72px"} />
                     {variant === 'small' && (
                         <span className={styles.movieRuntime}>{formatRuntime(movie.runtime)}</span>

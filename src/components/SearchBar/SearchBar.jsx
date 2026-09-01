@@ -99,7 +99,7 @@ export function SearchBar() {
         <>
             <div
                 ref={blurOverlayRef}
-                className={styles.backdropOverlay}
+                className='backdropOverlay'
                 onClick={closeSearchbar}
             />
 

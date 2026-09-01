@@ -3,7 +3,6 @@ import clsx from 'clsx'
 import { ArrowIcon } from '../Icons/Icons'
 
 export function SectionHeader(props) {
-    console.log(props.variant)
     return (
         <div className='container'>
             <div className={clsx(
