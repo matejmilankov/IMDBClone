@@ -15,8 +15,8 @@
     width: 100%;
 }
 
-.heroSlideContent button:hover {
-    color: var(--color-primary-accent);
+.heroSlideContent button:hover svg{
+    fill: var(--color-primary-accent);
 }
 
 .heroSlideInfo {
