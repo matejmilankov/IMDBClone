@@ -22,7 +22,12 @@ export function HeroSlider({ heroMovies }) {
 
     return (
         <>
-            {clickedTrailerId && <TrailerModal clickedTrailerId={clickedTrailerId}/>}
+            {clickedTrailerId && (
+                <TrailerModal 
+                    clickedTrailerId={clickedTrailerId}
+                    closeTrailerModal={() => setClickedTrailerId(null)}
+                />
+            )}
 
             <section className='heroSection'>
                 <Swiper

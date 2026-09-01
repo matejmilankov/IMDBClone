@@ -2,8 +2,11 @@ import { useMovieTrailer } from "../../hooks/useMovieTrailer";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from 'gsap';
+import YouTube from "react-youtube";
+import styles from './TrailerModal.module.css'
 
-export function TrailerModal({ clickedTrailerId }) {
+export function TrailerModal({ clickedTrailerId, closeTrailerModal }) {
+
     const { trailer, error, isLoading } = useMovieTrailer(clickedTrailerId);
     console.log(trailer);
 
@@ -21,20 +24,30 @@ export function TrailerModal({ clickedTrailerId }) {
         gsap.to(blurOverlayRef.current, {
             opacity: 0,
             pointerEvents: 'none',
-            duration: 0.3
+            duration: 0.3,
+            onComplete: closeTrailerModal
         });
     }
+
 
     return (
         <>
             {isLoading && <p>Loading...</p>}
             {error && <p>Something went wrong. Please try again later.</p>}
-            <div 
-                className='backdropOverlay visible' 
-                ref={blurOverlayRef} 
+            <div
+                className='backdropOverlay visible'
+                ref={blurOverlayRef}
                 onClick={closeOverlay}
-            />
+            >
+                {trailer && (
+                    <div className={styles.yt}>
+                        <YouTube
+                            videoId={trailer[0].key}
+                        />
+                    </div>
+                )}
 
+            </div>
         </>
     )
 }
