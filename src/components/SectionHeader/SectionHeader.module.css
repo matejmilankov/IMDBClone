@@ -1,0 +1,61 @@
+.headerLayout.standard {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+.sectionPreHeader,
+.sectionHeaderWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.sectionPreHeader h2 {
+    font-size: 28px;
+    color: var(--color-primary-accent);
+}
+.sectionPreHeader span {
+    color: var(--color-secondary-accent);
+    margin-right: 4px;
+}
+
+.sectionIndicator {
+    display: flex;
+    gap: var(--spacing-extra-sm);
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 5px;
+}
+.sectionIndicator h3 {
+    font-size: 22px;
+}
+.line {
+    align-self: stretch;
+    width: 4px;
+    background-color: var(--color-primary-accent);
+    border-radius: 4px;
+}
+
+.sectionHeaderDesc {
+    opacity: 0.5;
+} 
+
+
+/* Extended version */
+.extended .sectionAction {
+    color: var(--color-secondary-accent);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.extended .sectionAction span {
+    font-size: var(--font-size-md);
+}
+.extended .sectionHeaderDesc {
+    display: none;
+}
+
+/* Reduced version */
+.reduced .sectionAction,
+.reduced .sectionHeaderDesc{
+    display: none;
+}
