@@ -49,3 +49,6 @@ body {
     z-index: 10;
     opacity: 0;
 }
+.backdropOverlay.visible {
+    z-index: 30;
+}
