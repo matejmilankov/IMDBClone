@@ -25,7 +25,7 @@ export function Home() {
                     header="Top picks"
                     headerDesc="Tv shows and movies just for you"
                 />
-                <section style={{margin:"200px 0"}}></section>
+                <section style={{padding:"200px 0"}}></section>
             </div>
         </>
     )

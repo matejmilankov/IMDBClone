@@ -1,6 +1,10 @@
 .headerWrapper {
     background-color: var(--color-light-background);
     padding: var(--spacing-df);
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 30;
 }
 
 .headerContainer {

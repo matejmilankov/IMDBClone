@@ -1,3 +1,7 @@
+.heroLayout {
+    height: 100%;
+}
+
 .heroLayout p {
     position: absolute;
     top: 50%;
