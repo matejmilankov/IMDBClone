@@ -5,6 +5,13 @@
     opacity: 0.6;
 }
 
+.addToWatchlist {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
 .wideWatchlistButton {
     display: flex;
     align-items: center;

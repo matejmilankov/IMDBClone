@@ -1,6 +1,7 @@
 import styles from './MovieCard.module.css'
 import { WatchlistButton } from '../WatchlistButton/WatchlistButton'
 import { MovieRating } from '../MovieRating/MovieRating'
+import { RatePicker } from '../RatePicker/RatePicker'
 
 export function MovieCard({ movie }) {
     return (
@@ -9,16 +10,27 @@ export function MovieCard({ movie }) {
                 <img src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt={movie.title} />
                 <WatchlistButton movie={movie} />
             </div>
+
             <div className={styles.moviCardDesc}>
-                <div className={styles.ratingWrap}>
-                    <MovieRating rating={movie.vote_average} />
+                <div className={styles.movieCardInfo}>
+                    <div className={styles.ratingWrap}>
+                        <MovieRating rating={movie.vote_average} />
+                        <RatePicker 
+                            iconHeight="16px"
+                            iconWidth="16px"
+                        />
+                    </div>
+                    <span>{movie.title}</span>
                 </div>
-                {movie.title}
-                <WatchlistButton 
-                    variant='wide' 
-                    movie={movie}
-                />
+
+                <div>
+                    <WatchlistButton 
+                        variant='wide' 
+                        movie={movie}
+                    />
+                </div>
             </div>
+            
         </div>
     )
 }

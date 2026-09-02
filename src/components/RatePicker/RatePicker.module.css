@@ -1,0 +1,9 @@
+.ratePickerWrapper {
+    padding: 4px var(--spacing-sm);
+    border-radius: 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.ratePickerWrapper:hover {
+    background-color: rgb(49, 49, 49);
+}

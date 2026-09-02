@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 .movieCardPoster {
@@ -15,11 +17,23 @@
     object-fit: cover;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    aspect-ratio: 2 / 3;
 }
 
 .moviCardDesc {
     background-color: var(--color-light-background);
     padding: var(--spacing-sm);
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* height: 180px; */
+}
+
+.ratingWrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-sm);
 }

@@ -1,0 +1,9 @@
+.movieRatingWrapper {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.movieRatingWrapper span {
+    opacity: 0.6;
+}
