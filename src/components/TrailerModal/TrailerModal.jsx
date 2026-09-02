@@ -1,5 +1,5 @@
 import { useMovieTrailer } from "../../hooks/useMovieTrailer";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from 'gsap';
 import YouTube from "react-youtube";
@@ -32,6 +32,17 @@ export function TrailerModal({ clickedTrailerId, closeTrailerModal }) {
             onComplete: closeTrailerModal
         });
     }
+
+    useEffect(() => {
+        const handleEscKey = (event) => {
+            if(event.key === 'Escape') {
+                closeOverlay();
+            }
+        }
+        window.addEventListener('keydown', handleEscKey);
+
+        return () => window.removeEventListener('keydown', handleEscKey);
+    },  []);
 
 
     return (
