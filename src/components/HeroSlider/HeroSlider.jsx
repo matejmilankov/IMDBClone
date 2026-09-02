@@ -5,6 +5,9 @@ import { TrailerCard } from "../TrailerCard/TrailerCard";
 import { TrailerModal } from "../TrailerModal/TrailerModal";
 import styles from './HeroSlider.module.css'
 
+import 'swiper/css';
+import 'swiper/css/navigation';
+
 export function HeroSlider({ heroMovies }) {
     const mainSwiperRef = useRef(null);
     const upNextSwiperRef = useRef(null);

@@ -42,7 +42,14 @@ export function BigWatchlistIcon({ bookmarkWidth, bookmarkHeight, plusWidth, plu
                     <polygon fill={fill} points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343"></polygon>
                     <polygon fill="rgba(0, 0, 0, 0.6)" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049"></polygon>
                 </svg>
-                {fill === '#F5C518' ? (<CheckIcon />) : (<PlusIcon plusWidth={plusWidth} plusHeight={plusHeight} />)}
+                {fill === '#F5C518' ? (
+                    <CheckIcon
+                        width={plusWidth}
+                        height={plusHeight}
+                    />
+                ) : (
+                    <PlusIcon plusWidth={plusWidth} plusHeight={plusHeight} />
+                )}
             </div>
         </div>
     );
@@ -56,9 +63,9 @@ export function PlusIcon({ plusWidth, plusHeight }) {
     )
 }
 
-export function CheckIcon() {
+export function CheckIcon({ width, height }) {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#000" role="presentation"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M9 16.2l-3.5-3.5a.984.984 0 0 0-1.4 0 .984.984 0 0 0 0 1.4l4.19 4.19c.39.39 1.02.39 1.41 0L20.3 7.7a.984.984 0 0 0 0-1.4.984.984 0 0 0-1.4 0L9 16.2z"></path></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 24 24" fill="#000" role="presentation"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M9 16.2l-3.5-3.5a.984.984 0 0 0-1.4 0 .984.984 0 0 0 0 1.4l4.19 4.19c.39.39 1.02.39 1.41 0L20.3 7.7a.984.984 0 0 0 0-1.4.984.984 0 0 0-1.4 0L9 16.2z"></path></svg>
     )
 }
 
@@ -128,5 +135,17 @@ export function LikeIcon() {
 export function ArrowIcon({ width, height, color }) {
     return (
         <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill={color} role="presentation"><path d="M5.622.631A2.153 2.153 0 0 0 5 2.147c0 .568.224 1.113.622 1.515l8.249 8.34-8.25 8.34a2.16 2.16 0 0 0-.548 2.07c.196.74.768 1.317 1.499 1.515a2.104 2.104 0 0 0 2.048-.555l9.758-9.866a2.153 2.153 0 0 0 0-3.03L8.62.61C7.812-.207 6.45-.207 5.622.63z"></path></svg>
+    )
+}
+
+export function StarIcon({ width, height}) {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 24 24" fill="#0E63BE" role="presentation"><path d="M22.724 8.217l-6.786-.587-2.65-6.22c-.477-1.133-2.103-1.133-2.58 0l-2.65 6.234-6.772.573c-1.234.098-1.739 1.636-.8 2.446l5.146 4.446-1.542 6.598c-.28 1.202 1.023 2.153 2.09 1.51l5.818-3.495 5.819 3.509c1.065.643 2.37-.308 2.089-1.51l-1.542-6.612 5.145-4.446c.94-.81.45-2.348-.785-2.446zm-10.726 8.89l-5.272 3.174 1.402-5.983-4.655-4.026 6.141-.531 2.384-5.634 2.398 5.648 6.14.531-4.654 4.026 1.402 5.983-5.286-3.187z"></path></svg>
+    )
+}
+
+export function FilledStarIcon({ width, height}) {
+    return (
+        <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(245, 197, 24)" role="presentation"><path d="M12 20.1l5.82 3.682c1.066.675 2.37-.322 2.09-1.584l-1.543-6.926 5.146-4.667c.94-.85.435-2.465-.799-2.567l-6.773-.602L13.29.89a1.38 1.38 0 0 0-2.581 0l-2.65 6.53-6.774.602C.052 8.126-.453 9.74.486 10.59l5.147 4.666-1.542 6.926c-.28 1.262 1.023 2.26 2.09 1.585L12 20.099z"></path></svg>
     )
 }

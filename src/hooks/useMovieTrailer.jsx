@@ -15,7 +15,7 @@ export function useMovieTrailer(movieId) {
                 const trailers = response.data.results.find(t => t.type === "Trailer" && t.site === "YouTube");
                 setTrailer(trailers)
             } catch (err) {
-                console.log("Error, couldn't load movies.", err);
+                console.error("Error, couldn't load movies.", err);
                 setError(err);
             } finally {
                 setIsLoading(false);

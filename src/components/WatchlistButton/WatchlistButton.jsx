@@ -1,4 +1,4 @@
-import { BigWatchlistIcon, PlusIcon } from "../Icons/Icons";
+import { BigWatchlistIcon, PlusIcon, CheckIcon } from "../Icons/Icons";
 import { useWatchlist } from "../../contexts/WatchlistContext";
 import styles from './WatchlistButton.module.css'
 
@@ -10,13 +10,22 @@ export function WatchlistButton({ movie, variant = 'bookmark' }) {
         toggleWatchlist(movie);
     }
 
-    if(variant === 'wide') {
+    if (variant === 'wide') {
         return (
-            <button className={styles.wideWatchlistButton}>
-                <PlusIcon 
-                    plusWidth={"20px"}
-                    plusHeight={"20px"}
-                />
+            <button className={styles.wideWatchlistButton}
+                onClick={handleClick}
+            >
+                {isInWatchlist(movie.id) ? (
+                    <CheckIcon 
+                        width={"20px"}
+                        height={"20px"}
+                    />
+                ) : (
+                    <PlusIcon
+                        plusWidth={"20px"}
+                        plusHeight={"20px"}
+                    />
+                )}
                 <span>Watchlist</span>
             </button>
         )
@@ -24,13 +33,13 @@ export function WatchlistButton({ movie, variant = 'bookmark' }) {
 
     return (
         <button className={styles.addToWatchlist}
-                onClick={handleClick}
+            onClick={handleClick}
         >
             <BigWatchlistIcon
-                bookmarkWidth={"34px"}
-                bookmarkHeight={"47px"}
-                plusHeight={"24px"}
-                plusWidth={"24px"}
+                bookmarkWidth="34px"
+                bookmarkHeight="47px"
+                plusHeight="24px"
+                plusWidth="24px"
                 fill={isInWatchlist(movie.id) ? "#F5C518" : "rgba(0, 0, 0, 0.6)"}
             />
         </button>
