@@ -1,0 +1,12 @@
+.addToWatchlist polygon {
+    transition: all 0.2s ease-in-out;
+}
+.addToWatchlist:hover polygon {
+    opacity: 0.6;
+}
+
+.wideWatchlistButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

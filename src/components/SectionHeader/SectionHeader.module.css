@@ -1,3 +1,7 @@
+.sectionHeader {
+    padding: 50px 0;
+}
+
 .headerLayout.standard {
     display: flex;
     flex-direction: column;

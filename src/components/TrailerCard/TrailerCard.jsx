@@ -1,15 +1,14 @@
 import styles from './TrailerCard.module.css'
 import clsx from 'clsx';
 import gsap from 'gsap';
-import { PlayIcon, LikeIcon, BigWatchlistIcon } from "../../components/Icons/Icons";
+import { PlayIcon, LikeIcon } from "../../components/Icons/Icons";
 import { useEffect, useRef } from 'react';
 import { useSwiperSlide } from 'swiper/react';
-import { useWatchlist } from '../../contexts/WatchlistContext';
+import { WatchlistButton } from '../WatchlistButton/WatchlistButton';
 
 export function TrailerCard({ movie, variant, setClickedTrailerId }) {
     const contentRef = useRef(null);
     const swiperSlide = useSwiperSlide();
-    const { toggleWatchlist, isInWatchlist } = useWatchlist();
 
     useEffect(() => {
         if(swiperSlide?.isActive && variant === 'large' && contentRef.current) {
@@ -30,20 +29,9 @@ export function TrailerCard({ movie, variant, setClickedTrailerId }) {
             <div className={styles.coverImageWrapper}>
                 <img src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt={movie.title} />
                 {variant === 'large' && (
-                    <button className={styles.addToWatchlist} 
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                toggleWatchlist(movie)
-                            }}
-                    >
-                        <BigWatchlistIcon
-                            bookmarkWidth={"34px"}
-                            bookmarkHeight={"47px"}
-                            plusHeight={"24px"}
-                            plusWidth={"24px"}
-                            fill={isInWatchlist(movie.id) ? "#F5C518" : "rgba(0, 0, 0, 0.6)"}
-                        />
-                    </button>
+                    <WatchlistButton 
+                        movie={movie}
+                    />
                 )}
             </div>
             <div className={styles.heroSlideContent}>
