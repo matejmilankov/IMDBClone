@@ -11,6 +11,7 @@ export function TrailerModal({ clickedTrailerId, closeTrailerModal }) {
     console.log(trailer);
 
     const blurOverlayRef = useRef(null);
+    const modalRef = useRef(null)
 
     useGSAP(() => {
         gsap.to(blurOverlayRef.current, {
@@ -21,6 +22,9 @@ export function TrailerModal({ clickedTrailerId, closeTrailerModal }) {
     });
 
     const closeOverlay = () => {
+        if (modalRef.current) {
+            gsap.to(modalRef.current, { scale: 0, opacity: 0, duration: 0.5 });
+        }
         gsap.to(blurOverlayRef.current, {
             opacity: 0,
             pointerEvents: 'none',
@@ -40,9 +44,14 @@ export function TrailerModal({ clickedTrailerId, closeTrailerModal }) {
                 onClick={closeOverlay}
             >
                 {trailer && (
-                    <div className={styles.yt}>
+                    <div className={styles.yt} ref={modalRef}>
                         <YouTube
                             videoId={trailer[0].key}
+                            opts={{
+                                width: '100%',
+                                height: '100%',
+                                playerVars: { autoplay: 1 }
+                            }}
                         />
                     </div>
                 )}
