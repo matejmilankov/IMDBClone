@@ -5,7 +5,7 @@ import gsap from 'gsap';
 import YouTube from "react-youtube";
 import styles from './TrailerModal.module.css'
 
-export function TrailerModal({ clickedTrailerId, closeTrailerModal }) {
+export function TrailerModal({ clickedTrailerId, closeTrailerModal, mainSwiperRef }) {
 
     const { trailer, error, isLoading } = useMovieTrailer(clickedTrailerId);
     console.log(trailer);
@@ -17,32 +17,40 @@ export function TrailerModal({ clickedTrailerId, closeTrailerModal }) {
         gsap.to(blurOverlayRef.current, {
             opacity: 1,
             pointerEvents: 'auto',
-            duration: 0.3
+            duration: 0.3,
+            onComplete: () => {
+                document.body.style.overflow = 'hidden'
+            }
         });
+        mainSwiperRef.current.autoplay.stop();
     });
 
     const closeOverlay = () => {
         if (modalRef.current) {
-            gsap.to(modalRef.current, { scale: 0, opacity: 0, duration: 0.5 });
+            gsap.to(modalRef.current, { scale: 0.8, opacity: 0, duration: 0.5 });
         }
         gsap.to(blurOverlayRef.current, {
             opacity: 0,
             pointerEvents: 'none',
             duration: 0.3,
-            onComplete: closeTrailerModal
+            onComplete: () => {
+                closeTrailerModal();
+                document.body.style.overflow = 'unset';
+                mainSwiperRef.current.autoplay.start();
+            }
         });
     }
 
     useEffect(() => {
         const handleEscKey = (event) => {
-            if(event.key === 'Escape') {
+            if (event.key === 'Escape') {
                 closeOverlay();
             }
         }
         window.addEventListener('keydown', handleEscKey);
 
         return () => window.removeEventListener('keydown', handleEscKey);
-    },  []);
+    }, []);
 
 
     return (
@@ -57,7 +65,7 @@ export function TrailerModal({ clickedTrailerId, closeTrailerModal }) {
                 {trailer && (
                     <div className={styles.yt} ref={modalRef}>
                         <YouTube
-                            videoId={trailer[0].key}
+                            videoId={trailer.key}
                             opts={{
                                 width: '100%',
                                 height: '100%',

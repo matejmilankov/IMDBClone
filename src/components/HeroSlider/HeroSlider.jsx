@@ -6,18 +6,18 @@ import { TrailerModal } from "../TrailerModal/TrailerModal";
 import styles from './HeroSlider.module.css'
 
 export function HeroSlider({ heroMovies }) {
-    const mainSwiper = useRef(null);
-    const upNextSwiper = useRef(null);
+    const mainSwiperRef = useRef(null);
+    const upNextSwiperRef = useRef(null);
 
     const [clickedTrailerId, setClickedTrailerId] = useState(null);
 
     useEffect(() => {
-        upNextSwiper.current?.slideTo(1, 0);
+        upNextSwiperRef.current?.slideTo(1, 0);
     }, [heroMovies]);
 
     const handleUpNextClick = (index) => {
         if (heroMovies.length === 0) return;
-        mainSwiper.current?.slideToLoop(index);
+        mainSwiperRef.current?.slideToLoop(index);
     };
 
     return (
@@ -26,6 +26,7 @@ export function HeroSlider({ heroMovies }) {
                 <TrailerModal 
                     clickedTrailerId={clickedTrailerId}
                     closeTrailerModal={() => setClickedTrailerId(null)}
+                    mainSwiperRef={mainSwiperRef}
                 />
             )}
 
@@ -36,10 +37,10 @@ export function HeroSlider({ heroMovies }) {
                     slidesPerView={1}
                     navigation
                     autoplay={{ delay: 4000 }}
-                    onSwiper={(swiper) => (mainSwiper.current = swiper)}
+                    onSwiper={(swiper) => (mainSwiperRef.current = swiper)}
                     onSlideChange={(swiper) => {
                         const nextIndex = (swiper.realIndex + 1) % heroMovies.length;
-                        upNextSwiper.current?.slideToLoop(nextIndex);
+                        upNextSwiperRef.current?.slideToLoop(nextIndex);
                     }
                     }
                     loop
@@ -63,7 +64,7 @@ export function HeroSlider({ heroMovies }) {
                         direction="vertical"
                         slidesPerView={3}
                         spaceBetween={12}
-                        onSwiper={(swiper) => (upNextSwiper.current = swiper)}
+                        onSwiper={(swiper) => (upNextSwiperRef.current = swiper)}
                         loop
                     >
                         {heroMovies.map((movie, index) => (

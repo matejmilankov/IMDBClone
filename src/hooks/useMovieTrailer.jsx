@@ -12,7 +12,7 @@ export function useMovieTrailer(movieId) {
                 const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/videos`, {
                     headers: { Authorization: `Bearer ${import.meta.env.VITE_TMDB_ACCESS_TOKEN}` }
                 });
-                const trailers = response.data.results.filter(t => t.type === "Trailer" && t.site === "YouTube");
+                const trailers = response.data.results.find(t => t.type === "Trailer" && t.site === "YouTube");
                 setTrailer(trailers)
             } catch (err) {
                 console.log("Error, couldn't load movies.", err);
