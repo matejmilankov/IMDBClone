@@ -3,8 +3,11 @@ import { WatchlistButton } from '../WatchlistButton/WatchlistButton';
 import { MovieRating } from '../MovieRating/MovieRating';
 import { RatePicker } from '../RatePicker/RatePicker';
 import { SmallPlayIcon, InfoIcon } from '../Icons/Icons';
+import { useTrailerModal } from '../../contexts/Trailer/TrailerContext';
 
 export function MovieCard({ movie }) {
+    const { openTrailerModal } = useTrailerModal();
+
     return (
         <div className={styles.moviCardWrapper}>
             <div className={styles.movieCardPoster}>
@@ -31,7 +34,7 @@ export function MovieCard({ movie }) {
                     />
 
                     <div className={styles.moviCardAction}>
-                        <button>
+                        <button onClick={() => openTrailerModal(movie.id)}>
                             <SmallPlayIcon />
                             <span>Trailer</span>
                         </button>

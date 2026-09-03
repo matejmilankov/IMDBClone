@@ -5,10 +5,13 @@ import { PlayIcon, LikeIcon } from "../../components/Icons/Icons";
 import { useEffect, useRef } from 'react';
 import { useSwiperSlide } from 'swiper/react';
 import { WatchlistButton } from '../WatchlistButton/WatchlistButton';
+import { useTrailerModal } from '../../contexts/Trailer/TrailerContext';
 
-export function TrailerCard({ movie, variant, setClickedTrailerId }) {
+export function TrailerCard({ movie, variant }) {
     const contentRef = useRef(null);
     const swiperSlide = useSwiperSlide();
+
+    const { openTrailerModal } = useTrailerModal();
 
     useEffect(() => {
         if(swiperSlide?.isActive && variant === 'large' && contentRef.current) {
@@ -35,7 +38,7 @@ export function TrailerCard({ movie, variant, setClickedTrailerId }) {
                 )}
             </div>
             <div className={styles.heroSlideContent}>
-                <button onClick={() => setClickedTrailerId(movie.id)}>
+                <button onClick={() => openTrailerModal(movie.id)}>
                     <PlayIcon width={"72px"} height={"72px"} />
                     {variant === 'small' && (
                         <span className={styles.movieRuntime}>{formatRuntime(movie.runtime)}</span>

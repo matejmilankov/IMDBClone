@@ -1,8 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Navigation, Autoplay } from "swiper/modules";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import { TrailerCard } from "../TrailerCard/TrailerCard";
-import { TrailerModal } from "../TrailerModal/TrailerModal";
 import styles from './HeroSlider.module.css'
 
 import 'swiper/css';
@@ -11,8 +10,6 @@ import 'swiper/css/navigation';
 export function HeroSlider({ heroMovies }) {
     const mainSwiperRef = useRef(null);
     const upNextSwiperRef = useRef(null);
-
-    const [clickedTrailerId, setClickedTrailerId] = useState(null);
 
     useEffect(() => {
         upNextSwiperRef.current?.slideTo(1, 0);
@@ -25,14 +22,6 @@ export function HeroSlider({ heroMovies }) {
 
     return (
         <>
-            {clickedTrailerId && (
-                <TrailerModal 
-                    clickedTrailerId={clickedTrailerId}
-                    closeTrailerModal={() => setClickedTrailerId(null)}
-                    mainSwiperRef={mainSwiperRef}
-                />
-            )}
-
             <section className='heroSection'>
                 <Swiper
                     modules={[Navigation, Autoplay]}
@@ -53,8 +42,7 @@ export function HeroSlider({ heroMovies }) {
                             <div className={styles.heroSlide} style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})` }}>
                                 <TrailerCard 
                                     movie={movie} 
-                                    variant='large' 
-                                    setClickedTrailerId={setClickedTrailerId}
+                                    variant='large'
                                 />
                             </div>
                         </SwiperSlide>

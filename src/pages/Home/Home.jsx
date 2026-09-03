@@ -2,12 +2,21 @@ import { Header } from "../../components/Header/Header"
 import { NowPlayingHeroSlider } from "../../components/HeroSlider/NowPlayingHeroSlider";
 import { TopPicksMovieSlider } from "../../components/MovieSlider/TopPicksMovieSlider";
 import { SectionHeader } from "../../components/SectionHeader/SectionHeader";
+import { useTrailerModal } from "../../contexts/Trailer/TrailerContext";
+import { TrailerModal } from "../../components/TrailerModal/TrailerModal";
 import styles from './Home.module.css'
 
 export function Home() {
+    const { clickedTrailerId, closeTrailerModal } = useTrailerModal();
 
     return (
         <>
+            {clickedTrailerId && (
+                <TrailerModal
+                    clickedTrailerId={clickedTrailerId}
+                    closeTrailerModal={closeTrailerModal}
+                />
+            )}
             <div className={styles.heroLayout}>
                 <Header />
                 <NowPlayingHeroSlider />
@@ -23,7 +32,7 @@ export function Home() {
                     <TopPicksMovieSlider />
                 </section>
 
-                
+
                 <section style={{ padding: "200px 0" }}></section>
             </div>
         </>

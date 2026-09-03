@@ -5,7 +5,7 @@ import gsap from 'gsap';
 import YouTube from "react-youtube";
 import styles from './TrailerModal.module.css'
 
-export function TrailerModal({ clickedTrailerId, closeTrailerModal, mainSwiperRef }) {
+export function TrailerModal({ clickedTrailerId, closeTrailerModal }) {
 
     const { trailer, error, isLoading } = useMovieTrailer(clickedTrailerId);
     console.log(trailer);
@@ -22,7 +22,6 @@ export function TrailerModal({ clickedTrailerId, closeTrailerModal, mainSwiperRe
                 document.body.style.overflow = 'hidden'
             }
         });
-        mainSwiperRef.current.autoplay.stop();
     });
 
     const closeOverlay = () => {
@@ -36,7 +35,6 @@ export function TrailerModal({ clickedTrailerId, closeTrailerModal, mainSwiperRe
             onComplete: () => {
                 closeTrailerModal();
                 document.body.style.overflow = 'unset';
-                mainSwiperRef.current.autoplay.start();
             }
         });
     }
