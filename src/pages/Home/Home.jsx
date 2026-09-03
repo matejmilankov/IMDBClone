@@ -17,6 +17,7 @@ export function Home() {
                     closeTrailerModal={closeTrailerModal}
                 />
             )}
+            
             <div className={styles.heroLayout}>
                 <Header />
                 <NowPlayingHeroSlider />

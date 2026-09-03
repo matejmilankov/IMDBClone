@@ -1,5 +1,5 @@
 import { BigWatchlistIcon, PlusIcon, CheckIcon } from "../Icons/Icons";
-import { useWatchlist } from "../../contexts/WatchlistContext";
+import { useWatchlist } from "../../contexts/Watchlist/WatchlistContext";
 import styles from './WatchlistButton.module.css'
 
 export function WatchlistButton({ movie, variant = 'bookmark' }) {

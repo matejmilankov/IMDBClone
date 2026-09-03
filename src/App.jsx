@@ -1,8 +1,8 @@
-import './App.css'
-import { Routes, Route } from 'react-router'
-import { Home } from './pages/Home/Home'
-import { WatchlistProvider } from './contexts/WatchlistProvider'
-import { TrailerProvider } from './contexts/Trailer/TrailerProvider'
+import './App.css';
+import { Routes, Route } from 'react-router';
+import { Home } from './pages/Home/Home';
+import { WatchlistProvider } from './contexts/Watchlist/WatchlistProvider';
+import { TrailerProvider } from './contexts/Trailer/TrailerProvider';
 
 function App() {
 

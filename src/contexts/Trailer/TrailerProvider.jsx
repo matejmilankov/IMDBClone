@@ -5,7 +5,6 @@ export function TrailerProvider({ children }) {
     const [clickedTrailerId, setClickedTrailerId] = useState(null);
 
     const openTrailerModal = useCallback((movieId) => {
-        console.log("OVde")
         setClickedTrailerId(movieId);
     }, []);
     const closeTrailerModal = useCallback(() => {

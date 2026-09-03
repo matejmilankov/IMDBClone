@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react"
-import { useWatchlist } from '../../contexts/WatchlistContext';
+import { useWatchlist } from '../../contexts/Watchlist/WatchlistContext';
 import { useGSAP } from "@gsap/react";
 import { Link } from "react-router";
 import { WatchlistIcon } from "../Icons/Icons";

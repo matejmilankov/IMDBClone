@@ -4,8 +4,6 @@ export const TrailerContext = createContext(null);
 
 export function useTrailerModal() {
     const context = useContext(TrailerContext);
-    if (!context) {
-        throw new Error('useTrailerModal must be used within TrailerProvider');
-    }
+    if (!context) throw new Error('useTrailerModal must be used within TrailerProvider');
     return context;
 }
