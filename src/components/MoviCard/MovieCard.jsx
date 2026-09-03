@@ -1,7 +1,8 @@
 import styles from './MovieCard.module.css'
-import { WatchlistButton } from '../WatchlistButton/WatchlistButton'
-import { MovieRating } from '../MovieRating/MovieRating'
-import { RatePicker } from '../RatePicker/RatePicker'
+import { WatchlistButton } from '../WatchlistButton/WatchlistButton';
+import { MovieRating } from '../MovieRating/MovieRating';
+import { RatePicker } from '../RatePicker/RatePicker';
+import { SmallPlayIcon, InfoIcon } from '../Icons/Icons';
 
 export function MovieCard({ movie }) {
     return (
@@ -15,7 +16,7 @@ export function MovieCard({ movie }) {
                 <div className={styles.movieCardInfo}>
                     <div className={styles.ratingWrap}>
                         <MovieRating rating={movie.vote_average} />
-                        <RatePicker 
+                        <RatePicker
                             iconHeight="16px"
                             iconWidth="16px"
                         />
@@ -24,13 +25,24 @@ export function MovieCard({ movie }) {
                 </div>
 
                 <div>
-                    <WatchlistButton 
-                        variant='wide' 
+                    <WatchlistButton
+                        variant='wide'
                         movie={movie}
                     />
+
+                    <div className={styles.moviCardAction}>
+                        <button>
+                            <SmallPlayIcon />
+                            <span>Trailer</span>
+                        </button>
+                        <button>
+                            <InfoIcon />
+                        </button>
+                    </div>
                 </div>
+                
             </div>
-            
+
         </div>
     )
 }
