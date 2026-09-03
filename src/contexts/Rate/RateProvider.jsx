@@ -2,20 +2,20 @@ import { RateContext } from "./RateContext";
 import { useState, useMemo, useCallback } from "react";
 
 export function RateProvider({ children }) {
-    const [clickedMovieId, setClickedMovieId] = useState(null);
+    const [clickedMovieTitle, setClickedMovieId] = useState(null);
 
-    const openRateModal = useCallback((movieId) => {
-        setClickedMovieId(movieId);
+    const openRateModal = useCallback((movieTitle) => {
+        setClickedMovieId(movieTitle);
     }, []);
     const closeRateModal = useCallback(() => {
         setClickedMovieId(null);
     }, []);
 
     const value = useMemo(() => ({
-        clickedMovieId,
+        clickedMovieTitle,
         openRateModal,
         closeRateModal
-    }), [clickedMovieId, openRateModal, closeRateModal]);
+    }), [clickedMovieTitle, openRateModal, closeRateModal]);
 
     return (
         <RateContext.Provider value={value}>

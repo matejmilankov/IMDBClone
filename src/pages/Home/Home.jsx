@@ -4,10 +4,13 @@ import { TopPicksMovieSlider } from "../../components/MovieSlider/TopPicksMovieS
 import { SectionHeader } from "../../components/SectionHeader/SectionHeader";
 import { useTrailerModal } from "../../contexts/Trailer/TrailerContext";
 import { TrailerModal } from "../../components/TrailerModal/TrailerModal";
+import { RateModal } from "../../components/RateModal/RateModal";
+import { useRateModal } from "../../contexts/Rate/RateContext";
 import styles from './Home.module.css'
 
 export function Home() {
     const { clickedTrailerId, closeTrailerModal } = useTrailerModal();
+    const { clickedMovieTitle, closeRateModal } = useRateModal();
 
     return (
         <>
@@ -15,6 +18,13 @@ export function Home() {
                 <TrailerModal
                     clickedTrailerId={clickedTrailerId}
                     closeTrailerModal={closeTrailerModal}
+                />
+            )}
+
+            {clickedMovieTitle && (
+                <RateModal 
+                    clickedMovieTitle={clickedMovieTitle}
+                    closeRateModal={closeRateModal}
                 />
             )}
             
