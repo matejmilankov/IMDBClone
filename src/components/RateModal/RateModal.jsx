@@ -1,18 +1,30 @@
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { useModalTransition } from "../../hooks/useModalTransition";
 import { StarIcon, CloseIcon } from "../Icons/Icons";
+import { useGSAP } from "@gsap/react";
 import styles from './RateModal.module.css';
+import gsap from 'gsap';
 
 export function RateModal({ closeRateModal, clickedMovieTitle }) {
     const [hoveredRating, setHoveredRating] = useState(0);
     const [rating, setRating] = useState(0);
 
-    const {closeOverlay, blurOverlayRef} = useModalTransition(closeRateModal);
+    const ratingIconRef = useRef(null);
+
+    const { closeOverlay, blurOverlayRef } = useModalTransition(closeRateModal);
 
     const lockRating = (event, starNumber) => {
         setRating(starNumber);
         event.stopPropagation();
     }
+
+    useGSAP(() => {
+        if(rating !== 0) {
+            gsap.to(ratingIconRef?.current, {
+                scale: 1.1, duration: 0.3, ease: "power2.inOut"
+            });
+        }
+    }, [rating]);
 
     return (
         <>
@@ -25,9 +37,9 @@ export function RateModal({ closeRateModal, clickedMovieTitle }) {
                     <div className={styles.rateModalContent}>
                         <span className={styles.rateModalPreHeader}>Rate this</span>
                         <span className={styles.rateModalTitle}>{clickedMovieTitle}</span>
-                        <div 
+                        <div
                             className={styles.stars}
-                            onMouseLeave={() => setHoveredRating(0)}    
+                            onMouseLeave={() => setHoveredRating(0)}
                         >
                             {Array.from({ length: 10 }).map((_, index) => {
                                 const starNumber = index + 1;
@@ -50,8 +62,8 @@ export function RateModal({ closeRateModal, clickedMovieTitle }) {
                                 )
                             })}
                         </div>
-                        <button 
-                            className={styles.rateButton} 
+                        <button
+                            className={styles.rateButton}
                             disabled={rating === 0}
                         >
                             Rate
@@ -60,6 +72,14 @@ export function RateModal({ closeRateModal, clickedMovieTitle }) {
                     <button className={styles.closeButton}>
                         <CloseIcon />
                     </button>
+                    <div className={styles.bigRateIcon} ref={ratingIconRef}>
+                        <StarIcon 
+                            width="120px" 
+                            height="120px" 
+                            filled={true} 
+                        />
+                        <span>{rating === 0 ? "?" : rating}</span>
+                    </div>
 
                 </div>
             </div>

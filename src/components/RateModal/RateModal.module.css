@@ -9,7 +9,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: var(--spacing-extra-lg);
+    padding: 64px 0 var(--spacing-extra-lg) 0;
 }
 
 .rateModalContent {
@@ -53,7 +53,8 @@
 .closeButton {
     position: absolute;
     right: 0;
-    top: -45px;
+    top: 0;
+    transform: translate(0, -100%);
     background: transparent;
     transition: all 0.2s ease-in;
     padding: var(--spacing-extra-sm);
@@ -68,4 +69,19 @@
 
 .closeButton svg {
     fill: var(--color-text);
+}
+
+.bigRateIcon {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+}
+
+.bigRateIcon span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: var(--font-size-extra-lg);
 }
