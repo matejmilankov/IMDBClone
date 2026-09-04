@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useModalTransition } from "../../hooks/useModalTransition";
-import styles from './RateModal.module.css'
-import { StarIcon } from "../Icons/Icons";
+import { StarIcon, CloseIcon } from "../Icons/Icons";
+import styles from './RateModal.module.css';
 
 export function RateModal({ closeRateModal, clickedMovieTitle }) {
     const [hoveredRating, setHoveredRating] = useState(0);
@@ -23,16 +23,18 @@ export function RateModal({ closeRateModal, clickedMovieTitle }) {
             >
                 <div className={styles.rateModalWrapper}>
                     <div className={styles.rateModalContent}>
-                        <span>Rate this</span>
-                        <span>{clickedMovieTitle}</span>
-                        <div className={styles.stars}>
+                        <span className={styles.rateModalPreHeader}>Rate this</span>
+                        <span className={styles.rateModalTitle}>{clickedMovieTitle}</span>
+                        <div 
+                            className={styles.stars}
+                            onMouseLeave={() => setHoveredRating(0)}    
+                        >
                             {Array.from({ length: 10 }).map((_, index) => {
                                 const starNumber = index + 1;
                                 return (
                                     <button
                                         key={starNumber}
                                         onMouseEnter={() => setHoveredRating(starNumber)}
-                                        onMouseLeave={() => setHoveredRating(0)}
                                         onClick={(event) => lockRating(event, starNumber)}
                                     >
                                         <StarIcon
@@ -48,10 +50,16 @@ export function RateModal({ closeRateModal, clickedMovieTitle }) {
                                 )
                             })}
                         </div>
-                        <button>
+                        <button 
+                            className={styles.rateButton} 
+                            disabled={rating === 0}
+                        >
                             Rate
                         </button>
                     </div>
+                    <button className={styles.closeButton}>
+                        <CloseIcon />
+                    </button>
 
                 </div>
             </div>

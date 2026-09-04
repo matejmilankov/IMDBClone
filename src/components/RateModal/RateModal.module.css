@@ -4,14 +4,68 @@
     left: 50%;
     translate: -50% -50%;
     z-index: 40;
-    width: clamp(500px, 40vw, 800px);
+    width: clamp(600px, 35vw, 800px);
     background-color: var(--color-light-background);
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: var(--spacing-md);
+    padding: var(--spacing-extra-lg);
 }
 
 .rateModalContent {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.rateModalPreHeader {
+    color: var(--color-primary-accent);
+    text-transform: uppercase;
+    font-size: var(--font-size-extra-sm);
+    letter-spacing: 1px;
+    margin: var(--spacing-sm) 0;
+    font-weight: bold;
+}
+
+.rateModalTitle {
+    font-size: var(--font-size-lg);
+}
+
+.stars {
+    display: flex;
+    gap: var(--spacing-extra-sm);
+    margin: var(--spacing-lg) 0;
+}
+
+.rateButton {
+    background-color: #313131;
+    width: 100%;
+    padding: var(--spacing-extra-sm);
+    border-radius: 30px;
+    font-weight: bold;
+    transition: all 0.2s ease-in;
+}
+.rateButton:disabled {
+    opacity: 0.5;
+}
+
+.closeButton {
+    position: absolute;
+    right: 0;
+    top: -45px;
+    background: transparent;
+    transition: all 0.2s ease-in;
+    padding: var(--spacing-extra-sm);
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.closeButton:hover {
+    background: rgba(255, 255, 255, 0.116);
+}
+
+.closeButton svg {
+    fill: var(--color-text);
 }
