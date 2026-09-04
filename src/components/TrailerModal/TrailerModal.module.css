@@ -1,5 +1,5 @@
 .yt {
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     translate: -50% -50%;
@@ -11,4 +11,12 @@
 .yt div {
     height: 100%;
     width: 100%;
+}
+
+.info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: 40;
 }

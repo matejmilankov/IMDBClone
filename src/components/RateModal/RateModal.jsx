@@ -1,10 +1,13 @@
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import { useGSAP } from "@gsap/react";
 import gsap from 'gsap';
+import styles from './RateModal.module.css'
+import { StarIcon } from "../Icons/Icons";
 
 export function RateModal({ closeRateModal, clickedMovieTitle }) {
     const blurOverlayRef = useRef(null);
-    console.log("Renderovan sam")
+    const [hoveredRating, setHoveredRating] = useState(0);
+    const [rating, setRating] = useState(0);
 
     const closeOverlay = () => {
         gsap.to(blurOverlayRef.current, {
@@ -29,6 +32,11 @@ export function RateModal({ closeRateModal, clickedMovieTitle }) {
         });
     });
 
+    const lockRating = (event, starNumber) => {
+        setRating(starNumber);
+        event.stopPropagation();
+    }
+
     return (
         <>
             <div
@@ -36,7 +44,36 @@ export function RateModal({ closeRateModal, clickedMovieTitle }) {
                 ref={blurOverlayRef}
                 onClick={closeOverlay}
             >
-                <span>{clickedMovieTitle}</span>
+                <div className={styles.rateModalWrapper}>
+                    <span>Rate this</span>
+                    <span>{clickedMovieTitle}</span>
+                    <div className={styles.stars}>
+                        {Array.from({ length: 10 }).map((_, index) => {
+                            const starNumber = index + 1;
+                            return (
+                                <button
+                                    key={starNumber}
+                                    onMouseEnter={() => setHoveredRating(starNumber)}
+                                    onMouseLeave={() => setHoveredRating(0)}
+                                    onClick={(event) => lockRating(event, starNumber)}
+                                >
+                                    <StarIcon
+                                        width="24px"
+                                        height="24px"
+                                        filled={
+                                            hoveredRating
+                                                ? starNumber <= hoveredRating
+                                                : starNumber <= rating
+                                        }
+                                    />
+                                </button>
+                            )
+                        })}
+                    </div>
+                    <button>
+                        Rate
+                    </button>
+                </div>
             </div>
         </>
     )

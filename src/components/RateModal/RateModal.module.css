@@ -1,0 +1,14 @@
+.rateModalWrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: 40;
+    width: clamp(500px, 40vw, 800px);
+    background-color: var(--color-light-background);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: var(--spacing-md);
+}

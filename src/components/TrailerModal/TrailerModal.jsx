@@ -53,13 +53,13 @@ export function TrailerModal({ clickedTrailerId, closeTrailerModal }) {
 
     return (
         <>
-            {isLoading && <p>Loading...</p>}
-            {error && <p>Something went wrong. Please try again later.</p>}
             <div
                 className='backdropOverlay visible'
                 ref={blurOverlayRef}
                 onClick={closeOverlay}
-            >
+                >
+                {isLoading && <p className={styles.info}>Loading...</p>}
+                {error && <p className={styles.info}>Something went wrong. Please try again later.</p>}
                 {trailer && (
                     <div className={styles.yt} ref={modalRef}>
                         <YouTube
