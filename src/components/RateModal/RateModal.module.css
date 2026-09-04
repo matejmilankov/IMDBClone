@@ -8,7 +8,10 @@
     background-color: var(--color-light-background);
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
     padding: var(--spacing-md);
+}
+
+.rateModalContent {
+    text-align: center;
 }

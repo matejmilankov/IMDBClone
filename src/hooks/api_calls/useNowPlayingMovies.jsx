@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { calculateHeroHeight } from '../utils.js';
+import { calculateHeroHeight } from '../../utils.js';
 import axios from "axios";
 
 export function useNowPlayingMovies(count = 10) {

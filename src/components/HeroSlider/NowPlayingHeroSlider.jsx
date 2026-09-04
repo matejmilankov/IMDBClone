@@ -1,4 +1,4 @@
-import { useNowPlayingMovies } from "../../hooks/useNowPlayingMovies";
+import { useNowPlayingMovies } from "../../hooks/api_calls/useNowPlayingMovies";
 import { HeroSlider } from "./HeroSlider";
 
 export function NowPlayingHeroSlider() {

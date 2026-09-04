@@ -1,4 +1,4 @@
-import { usePopularMovies } from "../../hooks/usePopularMovie";
+import { usePopularMovies } from "../../hooks/api_calls/usePopularMovie";
 import { MovieSlider } from "./MovieSlider";
 
 export function TopPicksMovieSlider() {
