@@ -10,7 +10,7 @@ import styles from './Home.module.css'
 
 export function Home() {
     const { clickedTrailerId, closeTrailerModal } = useTrailerModal();
-    const { clickedMovieTitle, closeRateModal } = useRateModal();
+    const { clickedMovie, closeRateModal, rateMovie } = useRateModal();
 
     return (
         <>
@@ -21,10 +21,11 @@ export function Home() {
                 />
             )}
 
-            {clickedMovieTitle && (
+            {clickedMovie && (
                 <RateModal 
-                    clickedMovieTitle={clickedMovieTitle}
+                    clickedMovie={clickedMovie}
                     closeRateModal={closeRateModal}
+                    rateMovie={rateMovie}
                 />
             )}
             

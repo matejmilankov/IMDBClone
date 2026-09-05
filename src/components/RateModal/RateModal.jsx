@@ -5,7 +5,7 @@ import { useGSAP } from "@gsap/react";
 import styles from './RateModal.module.css';
 import gsap from 'gsap';
 
-export function RateModal({ closeRateModal, clickedMovieTitle }) {
+export function RateModal({ closeRateModal, clickedMovie, rateMovie }) {
     const [hoveredRating, setHoveredRating] = useState(0);
     const [rating, setRating] = useState(0);
 
@@ -19,9 +19,10 @@ export function RateModal({ closeRateModal, clickedMovieTitle }) {
     }
 
     useGSAP(() => {
+        const targetScale = 0.75 + rating * 0.05;
         if(rating !== 0) {
             gsap.to(ratingIconRef?.current, {
-                scale: 1.1, duration: 0.3, ease: "power2.inOut"
+                scale: targetScale, duration: 0.3, ease: "power2.inOut"
             });
         }
     }, [rating]);
@@ -33,10 +34,13 @@ export function RateModal({ closeRateModal, clickedMovieTitle }) {
                 ref={blurOverlayRef}
                 onClick={closeOverlay}
             >
-                <div className={styles.rateModalWrapper}>
+                <div 
+                    className={styles.rateModalWrapper}
+                    onClick={(e) => e.stopPropagation()}    
+                >
                     <div className={styles.rateModalContent}>
                         <span className={styles.rateModalPreHeader}>Rate this</span>
-                        <span className={styles.rateModalTitle}>{clickedMovieTitle}</span>
+                        <span className={styles.rateModalTitle}>{clickedMovie.title}</span>
                         <div
                             className={styles.stars}
                             onMouseLeave={() => setHoveredRating(0)}
@@ -65,11 +69,18 @@ export function RateModal({ closeRateModal, clickedMovieTitle }) {
                         <button
                             className={styles.rateButton}
                             disabled={rating === 0}
+                            onClick={() => {
+                                rateMovie(clickedMovie, rating);
+                                closeOverlay();
+                            }}
                         >
                             Rate
                         </button>
                     </div>
-                    <button className={styles.closeButton}>
+                    <button 
+                        className={styles.closeButton}
+                        onClick={closeOverlay}
+                    >
                         <CloseIcon />
                     </button>
                     <div className={styles.bigRateIcon} ref={ratingIconRef}>

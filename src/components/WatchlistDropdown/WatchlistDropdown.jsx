@@ -31,11 +31,13 @@ export function WathchlistDropdown() {
 
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (isDropdownOpen && watchlistRef.current && !watchlistRef.current.contains(event.target))
+            if (isDropdownOpen && watchlistRef.current && !watchlistRef.current.contains(event.target)) {
                 dropdownTimeline.current?.reverse().then(() => {
                     setIsDropdownOpen(false);
                 });
-        }
+            }
+        };
+
         document.addEventListener('click', handleClickOutside);
 
         return () => document.removeEventListener('click', handleClickOutside);

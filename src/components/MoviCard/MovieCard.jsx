@@ -22,7 +22,8 @@ export function MovieCard({ movie }) {
                         <RatePicker
                             iconHeight="16px"
                             iconWidth="16px"
-                            movieTitle={movie.title}
+                            movie={movie}
+                            variant="small"
                         />
                     </div>
                     <span>{movie.title}</span>
