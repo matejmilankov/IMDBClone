@@ -1,9 +1,8 @@
-import { createContext, useContext } from "react";
+import { createContext } from "react";
+import { useSafeContext } from "../../hooks/generic_hooks/useSafeContext";
 
 export const RateContext = createContext();
 
 export function useRateModal() {
-    const context = useContext(RateContext);
-    if(!context) throw new Error('useRateModal must be used within RateProvider');
-    return context;
+    return useSafeContext(RateContext, 'RateProvider');
 }

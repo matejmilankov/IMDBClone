@@ -1,6 +1,6 @@
 import { RateContext } from "./RateContext";
 import { useState, useMemo, useCallback, useEffect } from "react";
-import { useModalState } from "../../hooks/useModalState";
+import { useModalState } from "../../hooks/generic_hooks/useModalState";
 
 export function RateProvider({ children }) {
     const {clickedItem: clickedMovie, openModal: openRateModal, closeModal: closeRateModal} = useModalState();

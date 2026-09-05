@@ -1,9 +1,8 @@
-import { createContext, useContext } from "react";
+import { createContext } from "react";
+import { useSafeContext } from "../../hooks/generic_hooks/useSafeContext";
 
 export const WatchlistContext = createContext(null);
 
 export function useWatchlist() {
-    const context = useContext(WatchlistContext);
-    if(!context) throw new Error('useWatchlist must be used within WatchlistProvider')
-    return context;
+    return useSafeContext(WatchlistContext, 'WatchlistProvider');
 }
