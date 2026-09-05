@@ -26,6 +26,7 @@ body {
     margin: 20px 20px 50px 20px;
     display: flex;
     gap: 20px;
+    position: relative;
 }
 
 .headerLink {
@@ -55,4 +56,11 @@ body {
 }
 .backdropOverlay.visible {
     z-index: 30;
+}
+
+.isLoading {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
