@@ -7,11 +7,13 @@ import styles from './RateModal.module.css';
 import gsap from 'gsap';
 
 export function RateModal() {
-    const { getRating, clickedMovie, closeRateModal, rateMovie } = useRateModal();
+    const { getRating, clickedMovie, closeRateModal, rateMovie, removeRate } = useRateModal();
     const { closeOverlay, blurOverlayRef } = useModalTransition(closeRateModal);
 
     const [hoveredRating, setHoveredRating] = useState(0);
     const [rating, setRating] = useState(getRating(clickedMovie.id));
+
+    const currentRating = getRating(clickedMovie.id);
 
     const ratingIconRef = useRef(null);
 
@@ -71,7 +73,7 @@ export function RateModal() {
                         </div>
                         <button
                             className={styles.rateButton}
-                            disabled={rating === 0}
+                            disabled={rating === 0 || rating === currentRating}
                             onClick={() => {
                                 rateMovie(clickedMovie, rating);
                                 closeOverlay();
@@ -79,6 +81,17 @@ export function RateModal() {
                         >
                             Rate
                         </button>
+                        {currentRating !== 0 && (
+                            <button
+                                className={styles.removeRateButton}
+                                onClick={() => {
+                                    removeRate(clickedMovie.id);
+                                    closeOverlay();
+                                }}
+                            >
+                                Remove rating
+                            </button>
+                        )}
                     </div>
                     <button 
                         className={styles.closeButton}

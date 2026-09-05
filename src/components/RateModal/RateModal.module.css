@@ -39,15 +39,28 @@
 }
 
 .rateButton {
-    background-color: #313131;
+    background-color: var(--color-primary-accent);
     width: 100%;
     padding: var(--spacing-extra-sm);
     border-radius: 30px;
     font-weight: bold;
     transition: all 0.2s ease-in;
+    color: var(--color-background);
+    margin: 0 0 var(--spacing-df) 0;
 }
+
 .rateButton:disabled {
+    background-color: #313131;
     opacity: 0.5;
+    color: var(--color-text);
+    cursor: default;
+}
+
+.removeRateButton {
+    width: 100%;
+    border-radius: 30px;
+    border: 1px solid var(--color-primary-accent);
+    padding: var(--spacing-extra-sm);
 }
 
 .closeButton {
@@ -63,6 +76,7 @@
     align-items: center;
     justify-content: center;
 }
+
 .closeButton:hover {
     background: rgba(255, 255, 255, 0.116);
 }

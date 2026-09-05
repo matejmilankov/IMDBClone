@@ -6,8 +6,6 @@ export function usePopularMovies(enabled) {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    console.log(enabled);
-
     useEffect(() => {
         if(enabled) {
             const fetchPopularMovies = async () => {

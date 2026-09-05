@@ -32,18 +32,25 @@ export function RateProvider({ children }) {
         });
     }, []);
 
+    const removeRate = useCallback((movieId) => {
+        setRatedMovies(prevMovies => (
+            prevMovies.filter(entry => entry.movie?.id !== movieId)
+        ));
+    }, []);
+
     const getRating = useCallback((movieId) => {
         const requestedMovie =  ratedMovies.find(entry => entry.movie.id === movieId);
         return requestedMovie ? requestedMovie.grade : 0;
     }, [ratedMovies]);
 
     const value = useMemo(() => ({
+        removeRate,
         getRating,
         rateMovie,
         clickedMovie,
         openRateModal,
         closeRateModal
-    }), [clickedMovie, openRateModal, closeRateModal, rateMovie, getRating]);
+    }), [clickedMovie, openRateModal, closeRateModal, rateMovie, getRating, removeRate]);
 
     return (
         <RateContext.Provider value={value}>
