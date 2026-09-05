@@ -1,0 +1,35 @@
+.rateModalWrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: 40;
+    width: clamp(600px, 35vw, 800px);
+    background-color: var(--color-light-background);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 64px 0 var(--spacing-extra-lg) 0;
+}
+
+.closeButton {
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translate(0, -100%);
+    background: transparent;
+    transition: all 0.2s ease-in;
+    padding: var(--spacing-extra-sm);
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.closeButton:hover {
+    background: rgba(255, 255, 255, 0.116);
+}
+
+.closeButton svg {
+    fill: var(--color-text);
+}

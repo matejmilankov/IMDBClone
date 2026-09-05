@@ -4,9 +4,11 @@ import { MovieRating } from '../MovieRating/MovieRating';
 import { RatePicker } from '../RatePicker/RatePicker';
 import { SmallPlayIcon, InfoIcon } from '../Icons/Icons';
 import { useTrailerModal } from '../../contexts/Trailer/TrailerContext';
+import { useMovieDetailsModal } from '../../contexts/MovieDetails/MovieDetailsContext';
 
 export function MovieCard({ movie }) {
     const { openTrailerModal } = useTrailerModal();
+    const { openMovieDetailsModal } = useMovieDetailsModal();
 
     return (
         <div className={styles.moviCardWrapper}>
@@ -40,7 +42,7 @@ export function MovieCard({ movie }) {
                             <SmallPlayIcon />
                             <span>Trailer</span>
                         </button>
-                        <button>
+                        <button onClick={() => openMovieDetailsModal(movie.id)}>
                             <InfoIcon />
                         </button>
                     </div>

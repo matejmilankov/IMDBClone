@@ -1,0 +1,6 @@
+.wrapper {
+    position: relative;
+    min-height: 350px;
+    background-color: var(--color-light-background);
+    border-radius: 24px;
+}

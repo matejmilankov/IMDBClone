@@ -7,7 +7,7 @@ export function NowPlayingHeroSlider() {
     return (
         <>
             {isLoading && <p className="isLoading">Loading...</p>}
-            {error && <p>Please try again later.</p>}
+            {error && <p>Error. Please try again later.</p>}
             <HeroSlider heroMovies={heroMovies} />
         </>
     )

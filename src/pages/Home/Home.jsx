@@ -6,16 +6,20 @@ import { useTrailerModal } from "../../contexts/Trailer/TrailerContext";
 import { TrailerModal } from "../../components/TrailerModal/TrailerModal";
 import { RateModal } from "../../components/RateModal/RateModal";
 import { useRateModal } from "../../contexts/Rate/RateContext";
+import { MovieDetailsModal } from "../../components/MovieDetailsModal/MovieDetailsModal";
+import { useMovieDetailsModal } from "../../contexts/MovieDetails/MovieDetailsContext";
 import styles from './Home.module.css'
 
 export function Home() {
     const { clickedTrailerId } = useTrailerModal();
     const { clickedMovie } = useRateModal();
+    const { clickedMovieDetails } = useMovieDetailsModal();
 
     return (
         <>
             {clickedTrailerId && <TrailerModal />}
             {clickedMovie && <RateModal />}
+            {clickedMovieDetails && <MovieDetailsModal />}
             
             <div className={styles.heroLayout}>
                 <Header />
