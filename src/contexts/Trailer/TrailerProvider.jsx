@@ -1,15 +1,9 @@
-import { useMemo, useState, useCallback } from "react";
+import { useMemo } from "react";
 import { TrailerContext } from "./TrailerContext";
+import { useModalState } from "../../hooks/useModalState";
 
 export function TrailerProvider({ children }) {
-    const [clickedTrailerId, setClickedTrailerId] = useState(null);
-
-    const openTrailerModal = useCallback((movieId) => {
-        setClickedTrailerId(movieId);
-    }, []);
-    const closeTrailerModal = useCallback(() => {
-        setClickedTrailerId(null);
-    }, []);
+    const {clickedItem: clickedTrailerId, openModal: openTrailerModal, closeModal: closeTrailerModal} = useModalState();
 
     const value = useMemo(() => ({
         clickedTrailerId,

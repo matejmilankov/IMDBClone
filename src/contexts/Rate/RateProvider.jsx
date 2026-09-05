@@ -1,19 +1,14 @@
 import { RateContext } from "./RateContext";
 import { useState, useMemo, useCallback, useEffect } from "react";
+import { useModalState } from "../../hooks/useModalState";
 
 export function RateProvider({ children }) {
-    const [clickedMovie, setClickedMovie] = useState(null);
+    const {clickedItem: clickedMovie, openModal: openRateModal, closeModal: closeRateModal} = useModalState();
+
     const [ratedMovies, setRatedMovies] = useState(() => {
         const savedData = localStorage.getItem('grades');
         return savedData ? JSON.parse(savedData) : [];
     });
-
-    const openRateModal = useCallback((movie) => {
-        setClickedMovie(movie);
-    }, []);
-    const closeRateModal = useCallback(() => {
-        setClickedMovie(null);
-    }, []);
 
     useEffect(() => {
         localStorage.setItem('grades', JSON.stringify(ratedMovies))
