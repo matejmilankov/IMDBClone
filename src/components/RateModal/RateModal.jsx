@@ -2,21 +2,18 @@ import { useState, useRef } from "react"
 import { useModalTransition } from "../../hooks/useModalTransition";
 import { StarIcon, CloseIcon } from "../Icons/Icons";
 import { useGSAP } from "@gsap/react";
+import { useRateModal } from "../../contexts/Rate/RateContext";
 import styles from './RateModal.module.css';
 import gsap from 'gsap';
 
-export function RateModal({ closeRateModal, clickedMovie, rateMovie }) {
-    const [hoveredRating, setHoveredRating] = useState(0);
-    const [rating, setRating] = useState(0);
-
-    const ratingIconRef = useRef(null);
-
+export function RateModal() {
+    const { getRating, clickedMovie, closeRateModal, rateMovie } = useRateModal();
     const { closeOverlay, blurOverlayRef } = useModalTransition(closeRateModal);
 
-    const lockRating = (event, starNumber) => {
-        setRating(starNumber);
-        event.stopPropagation();
-    }
+    const [hoveredRating, setHoveredRating] = useState(0);
+    const [rating, setRating] = useState(getRating(clickedMovie.id));
+
+    const ratingIconRef = useRef(null);
 
     useGSAP(() => {
         const targetScale = 0.75 + rating * 0.05;
@@ -26,6 +23,12 @@ export function RateModal({ closeRateModal, clickedMovie, rateMovie }) {
             });
         }
     }, [rating]);
+
+    const lockRating = (event, starNumber) => {
+        setRating(starNumber);
+        event.stopPropagation();
+    }
+
 
     return (
         <>

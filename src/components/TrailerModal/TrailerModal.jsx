@@ -1,12 +1,14 @@
 import { useMovieTrailer } from "../../hooks/api_calls/useMovieTrailer";
 import { useModalTransition } from "../../hooks/useModalTransition";
 import { useRef } from "react";
+import { useTrailerModal } from "../../contexts/Trailer/TrailerContext";
 import YouTube from "react-youtube";
 import styles from './TrailerModal.module.css'
 
-export function TrailerModal({ clickedTrailerId, closeTrailerModal }) {
+export function TrailerModal() {
     const modalRef = useRef(null);
     
+    const { clickedTrailerId, closeTrailerModal } = useTrailerModal();
     const { trailer, error, isLoading } = useMovieTrailer(clickedTrailerId);
     const {closeOverlay, blurOverlayRef} = useModalTransition(closeTrailerModal, modalRef);
 

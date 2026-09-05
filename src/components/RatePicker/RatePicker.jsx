@@ -6,7 +6,6 @@ export function RatePicker({ variant, iconWidth, iconHeight, movie }) {
     const { openRateModal, getRating } = useRateModal();
 
     const currentRating = getRating(movie.id);
-    console.log(currentRating);
 
     return (
         <button

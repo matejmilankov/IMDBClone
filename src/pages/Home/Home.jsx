@@ -9,25 +9,13 @@ import { useRateModal } from "../../contexts/Rate/RateContext";
 import styles from './Home.module.css'
 
 export function Home() {
-    const { clickedTrailerId, closeTrailerModal } = useTrailerModal();
-    const { clickedMovie, closeRateModal, rateMovie } = useRateModal();
+    const { clickedTrailerId } = useTrailerModal();
+    const { clickedMovie } = useRateModal();
 
     return (
         <>
-            {clickedTrailerId && (
-                <TrailerModal
-                    clickedTrailerId={clickedTrailerId}
-                    closeTrailerModal={closeTrailerModal}
-                />
-            )}
-
-            {clickedMovie && (
-                <RateModal 
-                    clickedMovie={clickedMovie}
-                    closeRateModal={closeRateModal}
-                    rateMovie={rateMovie}
-                />
-            )}
+            {clickedTrailerId && <TrailerModal />}
+            {clickedMovie && <RateModal />}
             
             <div className={styles.heroLayout}>
                 <Header />
