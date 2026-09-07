@@ -6,6 +6,7 @@ import { useEffect, useRef } from 'react';
 import { useSwiperSlide } from 'swiper/react';
 import { WatchlistButton } from '../WatchlistButton/WatchlistButton';
 import { useTrailerModal } from '../../contexts/Trailer/TrailerContext';
+import { formatRuntime } from '../../utils';
 
 export function TrailerCard({ movie, variant }) {
     const contentRef = useRef(null);
@@ -21,11 +22,6 @@ export function TrailerCard({ movie, variant }) {
             );
         }
     }, [swiperSlide?.isActive, variant]);
-
-    const formatRuntime = (minutes) => {
-        const min = minutes % 60;
-        return `${Math.floor(minutes / 60)}:${min < 10 ? `0${min}` : min}`
-    }
 
     return (
         <div className={clsx(styles.heroSlideWrap, styles[variant])} ref={contentRef}>

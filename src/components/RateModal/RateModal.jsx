@@ -35,7 +35,7 @@ export function RateModal() {
     return (
         <>
             <div
-                className='backdropOverlay visible'
+                className='backdropOverlay visible isRateModal'
                 ref={blurOverlayRef}
                 onClick={closeOverlay}
             >

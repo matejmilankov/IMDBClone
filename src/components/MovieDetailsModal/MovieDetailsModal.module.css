@@ -4,12 +4,13 @@
     left: 50%;
     translate: -50% -50%;
     z-index: 40;
-    width: clamp(600px, 35vw, 800px);
+    width: clamp(600px, 40vw, 800px);
     background-color: var(--color-light-background);
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding: 64px 0 var(--spacing-extra-lg) 0;
+    padding: var(--spacing-lg);
+}
+
+.rateModalWrapper p {
+    margin-top: var(--spacing-df);
 }
 
 .closeButton {
@@ -32,4 +33,32 @@
 
 .closeButton svg {
     fill: var(--color-text);
+}
+
+.rateModalContent {
+    display: flex;
+}
+
+.imageWrapper {
+    width: 80px;
+    border-radius: 10px;
+}
+
+.movieOverview {
+    padding-left: var(--spacing-md);
+}
+
+.genres {
+    opacity: 0.6;
+    margin-top: 4px;
+}
+
+.ratingWrapper {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
+}
+
+.movieDetailsActions {
+    margin-top: var(--spacing-md);
 }

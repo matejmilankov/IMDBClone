@@ -57,6 +57,9 @@ body {
 .backdropOverlay.visible {
     z-index: 30;
 }
+.backdropOverlay.visible.isRateModal {
+    z-index: 31;
+}
 
 .isLoading {
     position: absolute;

@@ -6,6 +6,7 @@
     align-items: center;
     justify-content: center;
     gap: 5px;
+    color: var(--color-secondary-accent);
 }
 
 .ratePickerWrapper:hover {

@@ -1,0 +1,22 @@
+.movieTitle {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    line-height: 1;
+}
+
+.titleWrapper {
+    transition: all 0.3s ease-in-out;
+}
+.titleWrapper:hover svg{
+    fill: var(--color-primary-accent);
+}
+
+.shortInfo {
+    margin-top: var(--spacing-extra-sm);
+    opacity: 0.6;
+}
+
+.titleWrapper {
+    display: flex;
+    align-items: center;
+}
