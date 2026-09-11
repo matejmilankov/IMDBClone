@@ -7,7 +7,7 @@ import styles from './HeroSlider.module.css'
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-export function HeroSlider({ heroMovies }) {
+export function HeroSlider({ heroMovies, ref }) {
     const mainSwiperRef = useRef(null);
     const upNextSwiperRef = useRef(null);
 
@@ -22,7 +22,7 @@ export function HeroSlider({ heroMovies }) {
 
     return (
         <>
-            <section className='heroSection'>
+            <section className='heroSection' ref={ref}>
                 <Swiper
                     modules={[Navigation, Autoplay]}
                     spaceBetween={30}
