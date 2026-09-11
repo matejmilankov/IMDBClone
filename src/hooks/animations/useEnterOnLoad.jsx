@@ -1,7 +1,10 @@
 import { useGSAP } from "@gsap/react";
+import { useRef } from "react";
 import gsap from 'gsap';
 
-export function useEnterOnLoad({ isLoading, data, contentRef, inView = true }) {
+export function useEnterOnLoad({ isLoading, data, inView = true }) {
+    const contentRef = useRef(null);
+
     useGSAP(() => {
         if (!isLoading && data.length > 0 && inView) {
             gsap.from(contentRef.current, {
@@ -12,4 +15,6 @@ export function useEnterOnLoad({ isLoading, data, contentRef, inView = true }) {
             });
         }
     }, [isLoading, data, inView]);
+
+    return contentRef;
 }
