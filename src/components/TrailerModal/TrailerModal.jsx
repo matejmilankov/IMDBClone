@@ -1,5 +1,5 @@
 import { useMovieTrailer } from "../../hooks/api_calls/useMovieTrailer";
-import { useModalTransition } from "../../hooks/useModalTransition";
+import { useModalTransition } from "../../hooks/animations/useModalTransition";
 import { useRef } from "react";
 import { useTrailerModal } from "../../contexts/Trailer/TrailerContext";
 import YouTube from "react-youtube";

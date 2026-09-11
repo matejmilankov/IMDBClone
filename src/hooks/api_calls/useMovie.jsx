@@ -12,7 +12,6 @@ export function useMovie(movieId) {
                 const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}`, {
                     headers: {Authorization: `Bearer ${import.meta.env.VITE_TMDB_ACCESS_TOKEN}`}
                 });
-                console.log(response.data);
                 setMovieDetails(response.data)
             } catch(err) {
                 console.error("Error, couldn't load movie details.", err);

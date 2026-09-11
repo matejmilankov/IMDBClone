@@ -1,6 +1,6 @@
 import { useMovieDetailsModal } from "../../contexts/MovieDetails/MovieDetailsContext"
 import { useMovie } from "../../hooks/api_calls/useMovie"
-import { useModalTransition } from "../../hooks/useModalTransition"
+import { useModalTransition } from "../../hooks/animations/useModalTransition"
 import { CloseIcon } from "../Icons/Icons"
 import { MovieRating } from "../MovieRating/MovieRating"
 import { RatePicker } from "../RatePicker/RatePicker"

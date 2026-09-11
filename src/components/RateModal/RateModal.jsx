@@ -1,5 +1,5 @@
 import { useState, useRef } from "react"
-import { useModalTransition } from "../../hooks/useModalTransition";
+import { useModalTransition } from "../../hooks/animations/useModalTransition";
 import { StarIcon, CloseIcon } from "../Icons/Icons";
 import { useGSAP } from "@gsap/react";
 import { useRateModal } from "../../contexts/Rate/RateContext";
