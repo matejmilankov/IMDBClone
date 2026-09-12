@@ -44,6 +44,9 @@
     justify-content: space-between;
     margin-top: var(--spacing-sm);
 }
+.moviCardAction.reduced {
+    justify-content: center;
+}
 
 .moviCardAction button:first-child {
     display: flex;

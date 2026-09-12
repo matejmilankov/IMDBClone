@@ -5,6 +5,7 @@ import { SkeletonPlaceholder } from "../SkeletonPlaceholder/SkeletonPlaceholder"
 import { Lottie } from "lottie-react";
 import { useEnterOnLoad } from "../../hooks/animations/useEnterOnLoad";
 import loaderAnimation from '../../assets/loading.json';
+import styles from './Slider.module.css';
 
 export function TopPicksMovieSlider() {
 
@@ -21,23 +22,32 @@ export function TopPicksMovieSlider() {
             inView
         }
     );
-    
+
     return (
-        <div ref={ref} style={{position: 'relative'}}>
+        <div 
+            ref={ref} 
+            className={styles.sliderWrapper}
+        >
             {isLoading && (
                 <Lottie
                     src={loaderAnimation}
                     loop
                     autoplay
-                    style={{width: 200, height: 200}}
+                    style={{ width: 200, height: 200 }}
                     className="isLoading"
                 />
             )}
             {error && <p>Error. Please try again later.</p>}
-            {inView 
-                ? <div ref={sliderRef}><MovieSlider movies={popularMovies} /></div> 
-                : <SkeletonPlaceholder />
-            }       
+            {inView
+                ? (
+                    <div ref={sliderRef}>
+                        <MovieSlider movies={popularMovies} variant="standard" />
+                    </div>
+                )
+                : (
+                    <SkeletonPlaceholder />
+                )
+            }
         </div>
     )
 }

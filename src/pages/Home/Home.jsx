@@ -8,6 +8,7 @@ import { RateModal } from "../../components/RateModal/RateModal";
 import { useRateModal } from "../../contexts/Rate/RateContext";
 import { MovieDetailsModal } from "../../components/MovieDetailsModal/MovieDetailsModal";
 import { useMovieDetailsModal } from "../../contexts/MovieDetails/MovieDetailsContext";
+import { YourWatchlistSlider } from "../../components/MovieSlider/YourWatchlistSlider";
 import styles from './Home.module.css'
 
 export function Home() {
@@ -34,6 +35,14 @@ export function Home() {
                         headerDesc="Tv shows and movies just for you"
                     />
                     <TopPicksMovieSlider />
+                </section>
+
+                <section className="container">
+                    <SectionHeader 
+                        variant="reduced"
+                        header="From your watchlist"
+                    />
+                    <YourWatchlistSlider />
                 </section>
 
 
